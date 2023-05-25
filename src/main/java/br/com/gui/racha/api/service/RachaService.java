@@ -41,8 +41,7 @@ public class RachaService {
     public Racha updateById(Long id, RachaInput rachaInput) {
         Racha racha = findById(id);
         racha.setNome(rachaInput.getNome());
-        Quadra quadra = quadraService.findById(rachaInput.getQuadra());
-        racha.setQuadra(quadra);
+        racha.setQuadra(quadraService.findById(rachaInput.getQuadra()));
         racha.setCaixa(rachaInput.getCaixa());
         return rachaRepository.save(racha);
     }
