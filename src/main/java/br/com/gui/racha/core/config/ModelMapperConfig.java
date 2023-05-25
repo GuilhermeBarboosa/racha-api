@@ -1,11 +1,11 @@
-package br.com.gui.racha.config;
+package br.com.gui.racha.core.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ModelConfig {
+public class ModelMapperConfig {
 
     @Bean
     public ModelMapper novoModelMapper() {
