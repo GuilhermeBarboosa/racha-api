@@ -1,6 +1,5 @@
 package br.com.gui.racha.model.repository;
 
-import br.com.gui.racha.model.entity.Posicao;
 import br.com.gui.racha.model.entity.Quadra;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

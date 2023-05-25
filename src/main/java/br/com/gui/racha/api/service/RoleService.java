@@ -1,6 +1,5 @@
 package br.com.gui.racha.api.service;
 
-import br.com.gui.racha.model.entity.Racha;
 import br.com.gui.racha.model.entity.Role;
 import br.com.gui.racha.model.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;

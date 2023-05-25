@@ -1,10 +1,7 @@
 package br.com.gui.racha.api.service;
 
-import br.com.gui.racha.model.entity.Posicao;
 import br.com.gui.racha.model.entity.Quadra;
-import br.com.gui.racha.model.input.PosicaoInput;
 import br.com.gui.racha.model.input.QuadraInput;
-import br.com.gui.racha.model.repository.PosicaoRepository;
 import br.com.gui.racha.model.repository.QuadraRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
