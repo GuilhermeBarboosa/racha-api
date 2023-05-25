@@ -1,0 +1,57 @@
+package br.com.gui.racha.model.entity;
+
+import br.com.gui.racha.model.defaults.DefaultEntity;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.Instant;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "user")
+public class User  extends DefaultEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "nome", nullable = false)
+    private String nome;
+
+    @NotNull
+    @Column(name = "idade", nullable = false)
+    private Integer idade;
+
+    @Size(max = 30)
+    @NotNull
+    @Column(name = "telefone", nullable = false, length = 30)
+    private String telefone;
+
+    @Size(max = 40)
+    @NotNull
+    @Column(name = "email", nullable = false, length = 40)
+    private String email;
+
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "username", nullable = false, length =50)
+    private String username;
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "password", nullable = false, length = 255)
+    private String password;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "role", nullable = false)
+    private Role role;
+
+}
