@@ -37,7 +37,7 @@ public class RachaService {
     }
 
     public Racha findById(Long id) {
-        return rachaRepository.findById(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return rachaRepository.findById(id).orElseThrow(() -> new RuntimeException("Racha não encontrada"));
     }
 
     public Racha updateById(Long id, RachaInput rachaInput) {
@@ -60,6 +60,6 @@ public class RachaService {
     }
 
     public Racha findByIdDesactived(Long id) {
-        return rachaRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return rachaRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Racha não encontrada"));
     }
 }

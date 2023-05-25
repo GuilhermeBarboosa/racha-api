@@ -31,7 +31,7 @@ public class QuadraService {
     }
 
     public Quadra findById(Long id) {
-        return quadraRepository.findById(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return quadraRepository.findById(id).orElseThrow(() -> new RuntimeException("Quadra não encontrada"));
     }
 
     public Quadra updateById(Long id, QuadraInput quadraInput) {
@@ -51,6 +51,6 @@ public class QuadraService {
     }
 
     public Quadra findByIdDesactived(Long id) {
-        return quadraRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return quadraRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Quadra não encontrada"));
     }
 }

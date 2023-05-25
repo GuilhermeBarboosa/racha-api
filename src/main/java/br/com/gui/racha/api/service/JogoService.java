@@ -32,7 +32,7 @@ public class JogoService {
     }
 
     public Jogo findById(Long id) {
-        return jogoRepository.findById(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return jogoRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogo não encontrada"));
     }
 
     public Jogo updateById(Long id, JogoInput jogoInput) {
@@ -49,11 +49,11 @@ public class JogoService {
         return jogoRepository.save(jogo);
     }
 
-    public List<Jogo> listAllPosicao() {
+    public List<Jogo> listAllJogo() {
         return jogoRepository.findAllJogos();
     }
 
     public Jogo findByIdDesactived(Long id) {
-        return jogoRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return jogoRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Jogo não encontrada"));
     }
 }

@@ -26,8 +26,8 @@ public class JogadorController {
     @PostMapping
     public ResponseEntity<JogadorOutput> save(@Valid @RequestBody JogadorInput jogadorInput) {
         Jogador createdJogador = jogadorService.save(jogadorInput);
-        JogadorOutput rachaOutput = modelMapper.map(createdJogador, JogadorOutput.class);
-        return ResponseEntity.ok(rachaOutput);
+        JogadorOutput jogadorOutput = modelMapper.map(createdJogador, JogadorOutput.class);
+        return ResponseEntity.ok(jogadorOutput);
     }
 
     @GetMapping
@@ -39,9 +39,9 @@ public class JogadorController {
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<JogadorOutput>> listAllPosicao(){
-        List<Jogador> users = jogadorService.listAllPosicao();
+    @GetMapping("/desativado")
+    public ResponseEntity<List<JogadorOutput>> listAllJogador(){
+        List<Jogador> users = jogadorService.listAllJogador();
         List<JogadorOutput> responseDTOS = users.stream()
                 .map(jogador -> modelMapper.map(jogador, JogadorOutput.class))
                 .collect(Collectors.toList());
@@ -51,28 +51,28 @@ public class JogadorController {
     @GetMapping("/{id}")
     public ResponseEntity<JogadorOutput> getById(@PathVariable Long id) {
         Jogador jogador = jogadorService.findById(id);
-        JogadorOutput rachaOutput = modelMapper.map(jogador, JogadorOutput.class);
-        return ResponseEntity.ok(rachaOutput);
+        JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
+        return ResponseEntity.ok(jogadorOutput);
     }
 
     @GetMapping("/desativado/{id}")
     public ResponseEntity<JogadorOutput> getByIdDesactived(@PathVariable Long id) {
         Jogador jogador = jogadorService.findByIdDesactived(id);
-        JogadorOutput rachaOutput = modelMapper.map(jogador, JogadorOutput.class);
-        return ResponseEntity.ok(rachaOutput);
+        JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
+        return ResponseEntity.ok(jogadorOutput);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<JogadorOutput> updateById(@PathVariable Long id, @RequestBody @Valid JogadorInput jogadorInput) {
-        Jogador updatedPosicao = jogadorService.updateById(id, jogadorInput);
-        JogadorOutput rachaOutput = modelMapper.map(updatedPosicao, JogadorOutput.class);
-        return ResponseEntity.ok(rachaOutput);
+        Jogador updatedJogador = jogadorService.updateById(id, jogadorInput);
+        JogadorOutput jogadorOutput = modelMapper.map(updatedJogador, JogadorOutput.class);
+        return ResponseEntity.ok(jogadorOutput);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<JogadorOutput> deactivateById(@PathVariable Long id) {
-        Jogador deactivatedPosicao = jogadorService.deactivateById(id);
-        JogadorOutput rachaOutput = modelMapper.map(deactivatedPosicao, JogadorOutput.class);
-        return ResponseEntity.ok(rachaOutput);
+        Jogador deactivatedJogador = jogadorService.deactivateById(id);
+        JogadorOutput jogadorOutput = modelMapper.map(deactivatedJogador, JogadorOutput.class);
+        return ResponseEntity.ok(jogadorOutput);
     }
 }

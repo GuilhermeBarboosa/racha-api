@@ -43,7 +43,7 @@ public class QuadraController {
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/desativado")
     public ResponseEntity<List<QuadraOutput>> listAllQuadra(){
         List<Quadra> quadras = quadraService.listAllQuadra();
         List<QuadraOutput> responseDTOS = quadras.stream()

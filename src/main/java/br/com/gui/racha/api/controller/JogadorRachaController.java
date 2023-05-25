@@ -39,9 +39,9 @@ public class JogadorRachaController {
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/desativado")
     public ResponseEntity<List<JogadorRachaOutput>> listAllPosicao(){
-        List<JogadorRacha> jogadores = jogadorRachaService.listAllPosicao();
+        List<JogadorRacha> jogadores = jogadorRachaService.listAllJogadorRacha();
         List<JogadorRachaOutput> responseDTOS = jogadores.stream()
                 .map(jogadoracha -> modelMapper.map(jogadoracha, JogadorRachaOutput.class))
                 .collect(Collectors.toList());

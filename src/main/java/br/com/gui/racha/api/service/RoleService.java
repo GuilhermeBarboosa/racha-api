@@ -17,7 +17,7 @@ public class RoleService {
 
 
     public Role findById(Long id) {
-        return roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role não encontrada"));
     }
 
 

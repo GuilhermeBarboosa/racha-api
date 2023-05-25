@@ -34,7 +34,7 @@ public class JogadorService {
     }
 
     public Jogador findById(Long id) {
-        return jogadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return jogadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogador não encontrada"));
     }
 
     public Jogador updateById(Long id, JogadorInput jogadorInput) {
@@ -53,11 +53,11 @@ public class JogadorService {
         return jogadorRepository.save(jogador);
     }
 
-    public List<Jogador> listAllPosicao() {
+    public List<Jogador> listAllJogador() {
         return jogadorRepository.findAllJogador();
     }
 
     public Jogador findByIdDesactived(Long id) {
-        return jogadorRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return jogadorRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Jogador não encontrada"));
     }
 }

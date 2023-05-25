@@ -39,7 +39,7 @@ public class RachaController {
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/desativado")
     public ResponseEntity<List<RachaOutput>> listAllRacha(){
         List<Racha> rachas = rachaService.listAllRacha();
         List<RachaOutput> responseDTOS = rachas.stream()

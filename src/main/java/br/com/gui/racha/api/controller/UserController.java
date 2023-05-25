@@ -39,7 +39,7 @@ public class UserController {
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/desativado")
     public ResponseEntity<List<UserOutput>> listAllUser(){
         List<User> users = userService.listAllUser();
         List<UserOutput> responseDTOS = users.stream()

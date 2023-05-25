@@ -39,9 +39,9 @@ public class JogoController {
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/desativado")
     public ResponseEntity<List<JogoOutput>> listAllPosicao(){
-        List<Jogo> quadras = jogoService.listAllPosicao();
+        List<Jogo> quadras = jogoService.listAllJogo();
         List<JogoOutput> responseDTOS = quadras.stream()
                 .map(jogo -> modelMapper.map(jogo, JogoOutput.class))
                 .collect(Collectors.toList());

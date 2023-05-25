@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User não encontrada"));
     }
 
     public User updateById(Long id, UserInput userInput) {
@@ -58,6 +58,6 @@ public class UserService {
     }
 
     public User findByIdDesactived(Long id) {
-        return userRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
+        return userRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("User não encontrada"));
     }
 }

@@ -39,7 +39,7 @@ public class PosicaoController {
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/desativado")
     public ResponseEntity<List<PosicaoOutput>> listAllPosicao(){
         List<Posicao> posicoes = posicaoService.listAllPosicao();
         List<PosicaoOutput> responseDTOS = posicoes.stream()
