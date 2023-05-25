@@ -1,7 +1,6 @@
 package br.com.gui.racha.model.defaults;
 
 import lombok.Data;
-import lombok.Value;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

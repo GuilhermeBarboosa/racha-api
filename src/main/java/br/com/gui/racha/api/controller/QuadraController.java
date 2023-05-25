@@ -1,12 +1,8 @@
 package br.com.gui.racha.api.controller;
 
 import br.com.gui.racha.api.service.QuadraService;
-import br.com.gui.racha.api.service.QuadraService;
-import br.com.gui.racha.model.entity.Quadra;
 import br.com.gui.racha.model.entity.Quadra;
 import br.com.gui.racha.model.input.QuadraInput;
-import br.com.gui.racha.model.input.QuadraInput;
-import br.com.gui.racha.model.output.QuadraOutput;
 import br.com.gui.racha.model.output.QuadraOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

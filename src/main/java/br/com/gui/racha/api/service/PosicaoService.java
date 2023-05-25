@@ -2,17 +2,13 @@ package br.com.gui.racha.api.service;
 
 import br.com.gui.racha.model.entity.Posicao;
 import br.com.gui.racha.model.input.PosicaoInput;
-import br.com.gui.racha.model.output.PosicaoOutput;
 import br.com.gui.racha.model.repository.PosicaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
