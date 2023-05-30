@@ -39,8 +39,7 @@ public class UserService {
         User user = findById(id);
         user.setNome(userInput.getNome());
         user.setEmail(userInput.getEmail());
-        user.setUsername(userInput.getUsername());
-        user.setPassword(userInput.getPassword());
+        user.setSenha(userInput.getSenha());
         user.setIdade(userInput.getIdade());
         user.setRole(roleService.findById(userInput.getRole()));
         user.setTelefone(userInput.getTelefone());

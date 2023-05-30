@@ -38,15 +38,10 @@ public class User  extends DefaultEntity implements Serializable {
     @Column(name = "email", nullable = false, length = 40)
     private String email;
 
-    @Size(max = 50)
-    @NotNull
-    @Column(name = "username", nullable = false, length =50)
-    private String username;
-
     @Size(max = 255)
     @NotNull
-    @Column(name = "password", nullable = false, length = 255)
-    private String password;
+    @Column(name = "senha", nullable = false, length = 255)
+    private String senha;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

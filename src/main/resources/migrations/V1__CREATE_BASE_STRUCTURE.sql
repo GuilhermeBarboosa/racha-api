@@ -102,8 +102,8 @@ CREATE TABLE IF NOT EXISTS `posicao` (
 --
 
 INSERT INTO `posicao` (`id`, `posicao`, `actived`, `created`, `updated`) VALUES
-                                                                             (5, 'gfdgfdgd', 1, '2023-05-24 14:55:22', '2023-05-24 16:08:01'),
-                                                                             (6, 'strin222g', 0, '2023-05-24 15:57:17', '2023-05-24 16:08:13');
+                                                                             (5, 'Ala', 1, '2023-05-24 14:55:22', '2023-05-24 16:08:01'),
+                                                                             (6, 'Meia', 1, '2023-05-24 15:57:17', '2023-05-24 16:08:13');
 
 -- --------------------------------------------------------
 
@@ -188,8 +188,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     `idade` int NOT NULL,
     `telefone` varchar(30) NOT NULL,
     `email` varchar(40) NOT NULL,
-    `username` varchar(50) NOT NULL,
-    `password` varchar(255) NOT NULL,
+    `senha` varchar(255) NOT NULL,
     `actived` tinyint(1) NOT NULL,
     `created` timestamp NOT NULL,
     `updated` timestamp NULL DEFAULT NULL,
@@ -202,8 +201,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Extraindo dados da tabela `user`
 --
 
-INSERT INTO `user` (`id`, `nome`, `idade`, `telefone`, `email`, `username`, `password`, `actived`, `created`, `updated`, `role`) VALUES
-    (1, 'Gui', 22, '34984039344', 'gui@gmail.com', 'guibrs', 'gui', 1, '2023-05-25 12:21:30', '2023-05-25 12:21:30', 1);
+INSERT INTO `user` (`id`, `nome`, `idade`, `telefone`, `email`, `senha`, `actived`, `created`, `updated`, `role`) VALUES
+    (1, 'Gui', 22, '34984039344', 'gui@gmail.com', 'gui', 1, '2023-05-25 12:21:30', '2023-05-25 12:21:30', 1);
 
 --
 -- Restrições para despejos de tabelas
