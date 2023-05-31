@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,6 +23,10 @@ import java.util.stream.Collectors;
 public class UserController {
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private final UserService userService;
 
@@ -68,10 +74,14 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserOutput> updateById(@PathVariable Long id, @RequestBody @Valid UserInput userInput) {
+    public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody @Valid UserInput userInput) {
         User updatedUser = userService.updateById(id, userInput);
-        UserOutput userOutput = modelMapper.map(updatedUser, UserOutput.class);
-        return ResponseEntity.ok(userOutput);
+        if(updatedUser == null){
+            return new ResponseEntity<String>("Senha igual a anterior", HttpStatus.BAD_REQUEST);
+        }else{
+            UserOutput userOutput = modelMapper.map(updatedUser, UserOutput.class);
+            return ResponseEntity.ok(userOutput);
+        }
     }
 
     @DeleteMapping("/{id}")

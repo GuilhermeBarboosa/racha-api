@@ -10,4 +10,5 @@ public class RachaApplication {
 		SpringApplication.run(RachaApplication.class, args);
 	}
 
+
 }

@@ -6,6 +6,7 @@ import br.com.gui.racha.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +21,12 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
     private final RoleService roleService;
 
     public User save(UserInput userInput) {
+        userInput.setSenha(passwordEncoder.encode(userInput.getSenha()));
         User user = modelMapper.map(userInput, User.class);
         user.setRole(roleService.findById(userInput.getRole()));
         return userRepository.save(user);
@@ -38,13 +42,17 @@ public class UserService {
 
     public User updateById(Long id, UserInput userInput) {
         User user = findById(id);
-        user.setNome(userInput.getNome());
-        user.setEmail(userInput.getEmail());
-        user.setSenha(userInput.getSenha());
-        user.setIdade(userInput.getIdade());
-        user.setRole(roleService.findById(userInput.getRole()));
-        user.setTelefone(userInput.getTelefone());
-        return userRepository.save(user);
+        if(userInput.getSenha().equals(user.getSenha())){
+            return null;
+        }else{
+            user.setNome(userInput.getNome());
+            user.setEmail(userInput.getEmail());
+            user.setSenha(passwordEncoder.encode(userInput.getSenha()));
+            user.setIdade(userInput.getIdade());
+            user.setRole(roleService.findById(userInput.getRole()));
+            user.setTelefone(userInput.getTelefone());
+            return userRepository.save(user);
+        }
     }
 
     public User deactivateById(Long id) {
