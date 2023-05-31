@@ -46,7 +46,7 @@ public class SwaggerConfiguration {
         return new ApiInfoBuilder()
                 .title("Racha API")
                 .description("API para racha")
-                .contact(new Contact("GUI", "", "guilherme.rocha@codiub.com.br"))
+                .contact(new Contact("GUI", "", "guilherme.rocha@estudante.iftm.edu.br"))
                 .version("1.0.0")
                 .build();
     }

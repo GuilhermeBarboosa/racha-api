@@ -7,6 +7,7 @@ import br.com.gui.racha.model.output.UserOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +25,14 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserOutput> save(@Valid @RequestBody UserInput userInput) {
-        User createdUser = userService.save(userInput);
-        UserOutput userOutput = modelMapper.map(createdUser, UserOutput.class);
-        return ResponseEntity.ok(userOutput);
+    public ResponseEntity<?> save(@Valid @RequestBody UserInput userInput) {
+        if(userService.findByEmail(userInput.getEmail()).isPresent()){
+            return new ResponseEntity<String>("Email já cadastrado", HttpStatus.BAD_REQUEST);
+        }else{
+            User createdUser = userService.save(userInput);
+            UserOutput userOutput = modelMapper.map(createdUser, UserOutput.class);
+            return ResponseEntity.ok(userOutput);
+        }
     }
 
     @GetMapping

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +59,9 @@ public class UserService {
 
     public User findByIdDesactived(Long id) {
         return userRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("User não encontrada"));
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
