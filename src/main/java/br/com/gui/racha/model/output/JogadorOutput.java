@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 public class JogadorOutput extends DefaultEntityDTO {
     private Long id;
     private String nome;
+    private UserOutput user;
+    private PosicaoOutput posicao;
     private Integer gols;
     private Integer assitencias;
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 25-Maio-2023 às 13:54
+-- Tempo de geração: 31-Maio-2023 às 11:14
 -- Versão do servidor: 8.0.29
 -- versão do PHP: 7.4.9
 
@@ -40,7 +40,14 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `posicao` (`posicao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `jogador`
+--
+
+INSERT INTO `jogador` (`id`, `user`, `posicao`, `gols`, `assitencias`, `actived`, `created`, `updated`) VALUES
+(1, 1, 5, 2, 3, 1, '2023-05-31 11:09:36', '2023-05-31 11:09:36');
 
 -- --------------------------------------------------------
 
@@ -59,7 +66,14 @@ CREATE TABLE IF NOT EXISTS `jogador_racha` (
   PRIMARY KEY (`id`),
   KEY `jogador` (`jogador`),
   KEY `jogador_racha_ibfk_2` (`racha`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `jogador_racha`
+--
+
+INSERT INTO `jogador_racha` (`id`, `jogador`, `racha`, `actived`, `created`, `updated`) VALUES
+(1, 1, 1, 1, '2023-05-31 11:12:29', '2023-05-31 11:12:29');
 
 -- --------------------------------------------------------
 
@@ -78,7 +92,14 @@ CREATE TABLE IF NOT EXISTS `jogo` (
   `updated` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `racha` (`racha`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `jogo`
+--
+
+INSERT INTO `jogo` (`id`, `data`, `valor_pago`, `racha`, `actived`, `created`, `updated`) VALUES
+(1, '2023-05-25 11:12:50', 100, 1, 1, '2023-05-31 11:12:50', '2023-05-31 11:12:50');
 
 -- --------------------------------------------------------
 
@@ -102,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `posicao` (
 --
 
 INSERT INTO `posicao` (`id`, `posicao`, `actived`, `created`, `updated`) VALUES
-(5, 'gfdgfdgd', 1, '2023-05-24 14:55:22', '2023-05-24 16:08:01'),
-(6, 'strin222g', 0, '2023-05-24 15:57:17', '2023-05-24 16:08:13');
+(5, 'Ala', 1, '2023-05-24 14:55:22', '2023-05-24 16:08:01'),
+(6, 'Meia', 1, '2023-05-24 15:57:17', '2023-05-24 16:08:13');
 
 -- --------------------------------------------------------
 
@@ -188,8 +209,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `idade` int NOT NULL,
   `telefone` varchar(30) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL,
   `actived` tinyint(1) NOT NULL,
   `created` timestamp NOT NULL,
   `updated` timestamp NULL DEFAULT NULL,
@@ -202,8 +222,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Extraindo dados da tabela `user`
 --
 
-INSERT INTO `user` (`id`, `nome`, `idade`, `telefone`, `email`, `username`, `password`, `actived`, `created`, `updated`, `role`) VALUES
-(1, 'Gui', 22, '34984039344', 'gui@gmail.com', 'guibrs', 'gui', 1, '2023-05-25 12:21:30', '2023-05-25 12:21:30', 1);
+INSERT INTO `user` (`id`, `nome`, `idade`, `telefone`, `email`, `senha`, `actived`, `created`, `updated`, `role`) VALUES
+(1, 'Gui', 22, '34984039344', 'gui@gmail.com', 'gui', 1, '2023-05-25 12:21:30', '2023-05-25 12:21:30', 1);
 
 --
 -- Restrições para despejos de tabelas

@@ -17,6 +17,6 @@ public class JogoOutput extends DefaultEntityDTO {
 
     private Integer valorPago;
 
-    private Racha racha;
+    private RachaOutput racha;
 
 }

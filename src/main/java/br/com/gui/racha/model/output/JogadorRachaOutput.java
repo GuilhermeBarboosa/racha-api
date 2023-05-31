@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JogadorRachaOutput extends DefaultEntityDTO {
     private Integer id;
-    private Jogador jogador;
-    private Racha racha;
+    private JogadorOutput jogador;
+    private RachaOutput racha;
 }
