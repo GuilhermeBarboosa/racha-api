@@ -7,6 +7,7 @@ import br.com.gui.racha.model.output.JogadorOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,6 +54,17 @@ public class JogadorController {
         Jogador jogador = jogadorService.findById(id);
         JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
         return ResponseEntity.ok(jogadorOutput);
+    }
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<?> getByUsuario(@PathVariable Long id) {
+        Jogador jogador = jogadorService.findByUser(id);
+        if(jogador == null){
+            return new ResponseEntity<String>("Jogador não encontrado", HttpStatus.BAD_REQUEST);
+        }else{
+            JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
+            return ResponseEntity.ok(jogadorOutput);
+        }
     }
 
     @GetMapping("/desativado/{id}")

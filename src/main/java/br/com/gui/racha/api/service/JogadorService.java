@@ -60,4 +60,8 @@ public class JogadorService {
     public Jogador findByIdDesactived(Long id) {
         return jogadorRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Jogador não encontrada"));
     }
+
+    public Jogador findByUser(Long id) {
+        return jogadorRepository.findByUserId(id).orElseThrow(() -> new RuntimeException("Jogador não encontrada"));
+    }
 }

@@ -3,6 +3,7 @@ package br.com.gui.racha.model.entity;
 import br.com.gui.racha.model.defaults.DefaultEntity;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@ToString
 @Table(name = "jogador")
 public class Jogador extends DefaultEntity implements Serializable {
     @Id
