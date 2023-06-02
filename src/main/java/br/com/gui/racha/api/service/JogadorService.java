@@ -26,6 +26,7 @@ public class JogadorService {
 
     public Jogador save(JogadorInput jogadorInput) {
         Jogador jogador = modelMapper.map(jogadorInput, Jogador.class);
+        System.out.println(jogador.toString());
         return jogadorRepository.save(jogador);
     }
 
@@ -39,7 +40,8 @@ public class JogadorService {
 
     public Jogador updateById(Long id, JogadorInput jogadorInput) {
         Jogador jogador = findById(id);
-        jogador.setAssitencias(jogadorInput.getAssitencias());
+
+        jogador.setAssistencias(jogadorInput.getAssistencias());
         jogador.setGols(jogadorInput.getGols());
         jogador.setPosicao(posicaoService.findById(jogadorInput.getPosicao()));
         jogador.setUser(userService.findById(jogadorInput.getUser()));

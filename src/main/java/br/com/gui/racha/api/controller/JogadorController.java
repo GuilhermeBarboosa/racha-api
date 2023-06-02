@@ -76,6 +76,9 @@ public class JogadorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<JogadorOutput> updateById(@PathVariable Long id, @RequestBody @Valid JogadorInput jogadorInput) {
+        System.out.println(id);
+        System.out.println(jogadorInput.toString());
+
         Jogador updatedJogador = jogadorService.updateById(id, jogadorInput);
         JogadorOutput jogadorOutput = modelMapper.map(updatedJogador, JogadorOutput.class);
         return ResponseEntity.ok(jogadorOutput);

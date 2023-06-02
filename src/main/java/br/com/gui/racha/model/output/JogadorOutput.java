@@ -13,6 +13,6 @@ public class JogadorOutput extends DefaultEntityDTO {
     private UserOutput user;
     private PosicaoOutput posicao;
     private Integer gols;
-    private Integer assitencias;
+    private Integer assistencias;
 
 }

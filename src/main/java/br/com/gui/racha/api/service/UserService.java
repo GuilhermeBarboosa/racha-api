@@ -28,6 +28,7 @@ public class UserService {
     public User save(UserInput userInput) {
         userInput.setSenha(passwordEncoder.encode(userInput.getSenha()));
         User user = modelMapper.map(userInput, User.class);
+        System.out.println(userInput.getRole());
         user.setRole(roleService.findById(userInput.getRole()));
         return userRepository.save(user);
     }

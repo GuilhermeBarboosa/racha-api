@@ -3,9 +3,11 @@ package br.com.gui.racha.model.input;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
+@ToString
 @AllArgsConstructor
 public class JogadorInput {
     private Long user;
@@ -14,5 +16,5 @@ public class JogadorInput {
 
     private Integer gols;
 
-    private Integer assitencias;
+    private Integer assistencias;
 }

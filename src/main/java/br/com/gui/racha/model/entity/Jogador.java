@@ -20,11 +20,11 @@ public class Jogador extends DefaultEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "user", nullable = false)
     private User user;
 
     @NotNull
@@ -37,8 +37,8 @@ public class Jogador extends DefaultEntity implements Serializable {
     private Integer gols;
 
     @NotNull
-    @Column(name = "assitencias", nullable = false)
-    private Integer assitencias;
+    @Column(name = "assistencias", nullable = false)
+    private Integer assistencias;
 
     @OneToMany(mappedBy = "jogador")
     private Set<JogadorRacha> jogadorRachas = new LinkedHashSet<>();

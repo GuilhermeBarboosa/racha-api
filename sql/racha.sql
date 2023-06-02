@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   `user` int NOT NULL,
   `posicao` int NOT NULL,
   `gols` int NOT NULL,
-  `assitencias` int NOT NULL,
+  `assistencias` int NOT NULL,
   `actived` tinyint(1) NOT NULL,
   `created` timestamp NOT NULL,
   `updated` timestamp NULL DEFAULT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `jogador` (
 -- Extraindo dados da tabela `jogador`
 --
 
-INSERT INTO `jogador` (`id`, `user`, `posicao`, `gols`, `assitencias`, `actived`, `created`, `updated`) VALUES
+INSERT INTO `jogador` (`id`, `user`, `posicao`, `gols`, `assistencias`, `actived`, `created`, `updated`) VALUES
 (1, 1, 5, 2, 3, 1, '2023-05-31 11:09:36', '2023-05-31 11:09:36');
 
 -- --------------------------------------------------------
