@@ -34,7 +34,8 @@ public class JogadorController {
     @GetMapping
     public ResponseEntity<List<JogadorOutput>> listAll(){
         List<Jogador> users = jogadorService.listAll();
-        List<JogadorOutput> responseDTOS = users.stream()
+        List<JogadorOutput> responseDTOS =
+                users.stream()
                 .map(jogador -> modelMapper.map(jogador, JogadorOutput.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
@@ -76,9 +77,6 @@ public class JogadorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<JogadorOutput> updateById(@PathVariable Long id, @RequestBody @Valid JogadorInput jogadorInput) {
-        System.out.println(id);
-        System.out.println(jogadorInput.toString());
-
         Jogador updatedJogador = jogadorService.updateById(id, jogadorInput);
         JogadorOutput jogadorOutput = modelMapper.map(updatedJogador, JogadorOutput.class);
         return ResponseEntity.ok(jogadorOutput);

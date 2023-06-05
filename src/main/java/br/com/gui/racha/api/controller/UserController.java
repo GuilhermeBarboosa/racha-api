@@ -52,7 +52,7 @@ public class UserController {
 
     @GetMapping("/desativado")
     public ResponseEntity<List<UserOutput>> listAllUser(){
-        List<User> users = userService.listAllUser();
+        List<User> users = userService.listAllUserDesactived();
         List<UserOutput> responseDTOS = users.stream()
                 .map(user -> modelMapper.map(user, UserOutput.class))
                 .collect(Collectors.toList());
@@ -82,6 +82,13 @@ public class UserController {
             UserOutput userOutput = modelMapper.map(updatedUser, UserOutput.class);
             return ResponseEntity.ok(userOutput);
         }
+    }
+
+    @PutMapping("/ativar/{id}")
+    public ResponseEntity<?> ativarById(@PathVariable Long id) {
+        User updatedUser = userService.ativarById(id);
+        UserOutput userOutput = modelMapper.map(updatedUser, UserOutput.class);
+        return ResponseEntity.ok(userOutput);
     }
 
     @DeleteMapping("/{id}")

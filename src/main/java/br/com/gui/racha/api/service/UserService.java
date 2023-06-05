@@ -62,8 +62,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> listAllUser() {
-        return userRepository.findAllUser();
+    public List<User> listAllUserDesactived() {
+        return userRepository.findAllUserDesactived();
     }
 
     public User findByIdDesactived(Long id) {
@@ -72,5 +72,11 @@ public class UserService {
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User ativarById(Long id) {
+        User user = findByIdDesactived(id);
+        user.setActived(true);
+        return userRepository.save(user);
     }
 }

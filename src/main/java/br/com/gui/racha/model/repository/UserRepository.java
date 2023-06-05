@@ -12,15 +12,15 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 
-    @Override
-    @Query("select u from User u where u.actived = true")
+//    @Override
+//    @Query("select u from User u where u.actived = true")
     List<User> findAll();
 
     @Query("select u from User u where u.actived = true and u.id = :id")
     Optional<User> findById(Long id);
 
-    @Query("select u from User u")
-    List<User> findAllUser();
+    @Query("select u from User u where u.actived = false")
+    List<User> findAllUserDesactived();
 
     @Query("select u from User u where u.id = :id")
     Optional<User> findByIdDesactived(Long id);
