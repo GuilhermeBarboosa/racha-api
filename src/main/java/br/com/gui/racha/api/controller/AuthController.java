@@ -6,14 +6,12 @@ import br.com.gui.racha.api.service.UserService;
 import br.com.gui.racha.model.entity.User;
 import br.com.gui.racha.model.input.LoginInput;
 import br.com.gui.racha.model.output.Token;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
@@ -47,6 +45,15 @@ public class AuthController {
     public boolean verifyToken(@RequestBody String token) {
         try {
             return jwtService.tokenValido(token);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
+
+    @PostMapping("/obterClaims")
+    public Claims obterClaims(@RequestBody String token) {
+        try {
+            return jwtService.obterClaims(token);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
