@@ -1,5 +1,6 @@
 package br.com.gui.racha.api.service;
 
+import br.com.gui.racha.api.exception.SenhaInvalidaException;
 import br.com.gui.racha.model.entity.Role;
 import br.com.gui.racha.model.entity.User;
 import br.com.gui.racha.model.input.UserInput;
@@ -84,7 +85,6 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -97,5 +97,14 @@ public class UserService implements UserDetailsService {
                 .password(user.getSenha())
                 .roles(role.getRole())
                 .build();
+    }
+
+    public User autenticar(User user){
+        UserDetails userDetails = loadUserByUsername(user.getEmail());
+        boolean senha = passwordEncoder.matches(user.getSenha(), userDetails.getPassword());
+        if(senha){
+           return findByEmail(user.getEmail()).get();
+        }
+        throw new SenhaInvalidaException();
     }
 }

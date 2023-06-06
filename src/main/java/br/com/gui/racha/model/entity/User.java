@@ -1,8 +1,7 @@
 package br.com.gui.racha.model.entity;
 
 import br.com.gui.racha.model.defaults.DefaultEntity;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +11,9 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user")
 public class User  extends DefaultEntity implements Serializable {
     @Id
@@ -44,7 +46,7 @@ public class User  extends DefaultEntity implements Serializable {
     private String senha;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 
