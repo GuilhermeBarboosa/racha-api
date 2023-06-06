@@ -1,5 +1,6 @@
 package br.com.gui.racha.api.service;
 
+import br.com.gui.racha.model.entity.Role;
 import br.com.gui.racha.model.entity.User;
 import br.com.gui.racha.model.input.UserInput;
 import br.com.gui.racha.model.repository.UserRepository;
@@ -46,9 +47,9 @@ public class UserService implements UserDetailsService {
 
     public User updateById(Long id, UserInput userInput) {
         User user = findById(id);
-        if(userInput.getSenha().equals(user.getSenha())){
+        if (userInput.getSenha().equals(user.getSenha())) {
             return null;
-        }else{
+        } else {
             user.setNome(userInput.getNome());
             user.setEmail(userInput.getEmail());
             user.setSenha(passwordEncoder.encode(userInput.getSenha()));
@@ -87,13 +88,14 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-       User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        Role role = roleService.findById(user.getRole().getId());
 
         return org.springframework.security.core.userdetails.User
                 .builder()
                 .username(user.getEmail())
                 .password(user.getSenha())
-                .roles("ADMIN")
+                .roles(role.getRole())
                 .build();
     }
 }
