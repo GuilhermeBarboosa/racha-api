@@ -26,7 +26,6 @@ public class RachaService {
         Racha racha = modelMapper.map(rachaInput, Racha.class);
         Quadra quadra = quadraService.findById(rachaInput.getQuadra());
         racha.setQuadra(quadra);
-        System.out.println(racha);
         return rachaRepository.save(racha);
     }
 

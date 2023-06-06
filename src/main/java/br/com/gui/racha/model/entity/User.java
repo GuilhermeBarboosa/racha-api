@@ -53,7 +53,6 @@ public class User  extends DefaultEntity implements Serializable {
 
     public boolean isAdmin(){
         if(this.role.getRole().equals("ADMIN")){
-            System.out.println("testeeeeeeeeeeeeeeee");
             return true;
         }else{
             return false;

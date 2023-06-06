@@ -29,9 +29,6 @@ public class JwtService {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private RoleService roleService;
-
     public String gerarToken(User user){
         long expString = Long.valueOf(expiration);
 
@@ -40,10 +37,6 @@ public class JwtService {
 
         HashMap<String, Object> claims = new HashMap<>();
 
-//        System.out.println("dasdasdsadsadas: ");
-//        System.out.println("Role: " + user.getRole().getId());
-//
-//        Role role = roleService.findById(user.getRole().getId());
         claims.put("role", user.getRole().getRole());
         claims.put("email", user.getEmail());
 

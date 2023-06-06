@@ -26,7 +26,6 @@ public class JogadorService {
 
     public Jogador save(JogadorInput jogadorInput) {
         Jogador jogador = modelMapper.map(jogadorInput, Jogador.class);
-        System.out.println(jogador.toString());
         return jogadorRepository.save(jogador);
     }
 
