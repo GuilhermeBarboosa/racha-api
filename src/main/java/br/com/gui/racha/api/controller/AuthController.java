@@ -9,8 +9,6 @@ import br.com.gui.racha.model.output.Token;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/auth")
+public class AuthController {
 
     @Autowired
     private UserService userService;
@@ -31,7 +27,7 @@ public class LoginController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping
+    @PostMapping("/login")
     public Token login(@RequestBody LoginInput loginInput) {
         try {
             User usuario = User.builder()
@@ -43,6 +39,15 @@ public class LoginController {
             return new Token(usuario.getEmail(), token);
 
         } catch (SenhaInvalidaException | UsernameNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
+
+    @PostMapping("/verifyToken")
+    public boolean verifyToken(@RequestBody String token) {
+        try {
+            return jwtService.tokenValido(token);
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
