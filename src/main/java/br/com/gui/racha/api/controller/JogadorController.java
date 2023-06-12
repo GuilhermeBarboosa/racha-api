@@ -32,17 +32,17 @@ public class JogadorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<JogadorOutput>> listAll(){
+    public ResponseEntity<List<JogadorOutput>> listAll() {
         List<Jogador> users = jogadorService.listAll();
         List<JogadorOutput> responseDTOS =
                 users.stream()
-                .map(jogador -> modelMapper.map(jogador, JogadorOutput.class))
-                .collect(Collectors.toList());
+                        .map(jogador -> modelMapper.map(jogador, JogadorOutput.class))
+                        .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
 
     @GetMapping("/desativado")
-    public ResponseEntity<List<JogadorOutput>> listAllJogador(){
+    public ResponseEntity<List<JogadorOutput>> listAllJogador() {
         List<Jogador> users = jogadorService.listAllJogador();
         List<JogadorOutput> responseDTOS = users.stream()
                 .map(jogador -> modelMapper.map(jogador, JogadorOutput.class))
@@ -60,9 +60,9 @@ public class JogadorController {
     @GetMapping("/usuario/{id}")
     public ResponseEntity<?> getByUsuario(@PathVariable Long id) {
         Jogador jogador = jogadorService.findByUser(id);
-        if(jogador == null){
+        if (jogador == null) {
             return new ResponseEntity<String>("Jogador não encontrado", HttpStatus.BAD_REQUEST);
-        }else{
+        } else {
             JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
             return ResponseEntity.ok(jogadorOutput);
         }

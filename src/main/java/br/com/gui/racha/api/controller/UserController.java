@@ -25,16 +25,13 @@ public class UserController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private final UserService userService;
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody UserInput userInput) {
-        if(userService.findByEmail(userInput.getEmail()).isPresent()){
+        if (userService.findByEmail(userInput.getEmail()).isPresent()) {
             return new ResponseEntity<String>("Email já cadastrado", HttpStatus.BAD_REQUEST);
-        }else{
+        } else {
             User createdUser = userService.save(userInput);
             UserOutput userOutput = modelMapper.map(createdUser, UserOutput.class);
             return ResponseEntity.ok(userOutput);
@@ -42,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserOutput>> listAll(){
+    public ResponseEntity<List<UserOutput>> listAll() {
         List<User> users = userService.listAll();
         List<UserOutput> responseDTOS = users.stream()
                 .map(user -> modelMapper.map(user, UserOutput.class))
@@ -51,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/desativado")
-    public ResponseEntity<List<UserOutput>> listAllUser(){
+    public ResponseEntity<List<UserOutput>> listAllUser() {
         List<User> users = userService.listAllUserDesactived();
         List<UserOutput> responseDTOS = users.stream()
                 .map(user -> modelMapper.map(user, UserOutput.class))
@@ -76,9 +73,9 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody @Valid UserInput userInput) {
         User updatedUser = userService.updateById(id, userInput);
-        if(updatedUser == null){
+        if (updatedUser == null) {
             return new ResponseEntity<String>("Senha igual a anterior", HttpStatus.BAD_REQUEST);
-        }else{
+        } else {
             UserOutput userOutput = modelMapper.map(updatedUser, UserOutput.class);
             return ResponseEntity.ok(userOutput);
         }

@@ -31,7 +31,7 @@ public class JogadorRachaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<JogadorRachaOutput>> listAll(){
+    public ResponseEntity<List<JogadorRachaOutput>> listAll() {
         List<JogadorRacha> jogadores = jogadorRachaService.listAll();
         List<JogadorRachaOutput> responseDTOS = jogadores.stream()
                 .map(jogadoracha -> modelMapper.map(jogadoracha, JogadorRachaOutput.class))
@@ -40,7 +40,7 @@ public class JogadorRachaController {
     }
 
     @GetMapping("/desativado")
-    public ResponseEntity<List<JogadorRachaOutput>> listAllPosicao(){
+    public ResponseEntity<List<JogadorRachaOutput>> listAllPosicao() {
         List<JogadorRacha> jogadores = jogadorRachaService.listAllJogadorRacha();
         List<JogadorRachaOutput> responseDTOS = jogadores.stream()
                 .map(jogadoracha -> modelMapper.map(jogadoracha, JogadorRachaOutput.class))

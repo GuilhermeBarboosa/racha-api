@@ -1,6 +1,6 @@
 package br.com.gui.racha.api.controller;
 
-import br.com.gui.racha.api.exception.SenhaInvalidaException;
+import br.com.gui.racha.exception.SenhaInvalidaException;
 import br.com.gui.racha.api.service.JwtService;
 import br.com.gui.racha.api.service.UserService;
 import br.com.gui.racha.model.entity.User;

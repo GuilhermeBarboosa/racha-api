@@ -1,4 +1,4 @@
-package br.com.gui.racha.api.exception;
+package br.com.gui.racha.exception;
 
 public class SenhaInvalidaException extends RuntimeException {
     public SenhaInvalidaException() {

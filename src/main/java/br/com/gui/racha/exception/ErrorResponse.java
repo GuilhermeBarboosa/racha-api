@@ -13,5 +13,5 @@ public class ErrorResponse {
     private String developerDetails;
     private HttpStatus status;
     private int code;
-    
+
 } 

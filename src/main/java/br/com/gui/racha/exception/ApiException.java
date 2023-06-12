@@ -21,7 +21,7 @@ public class ApiException extends RuntimeException {
         errorResponse.setStatus(HttpStatus.BAD_REQUEST);
     }
 
-    public ApiException(String message , Exception e) {
+    public ApiException(String message, Exception e) {
         super(message);
         e.printStackTrace();
         errorResponse = new ErrorResponse();
@@ -39,5 +39,5 @@ public class ApiException extends RuntimeException {
         errorResponse.setCode(HttpStatus.BAD_REQUEST.value());
         errorResponse.setStatus(HttpStatus.BAD_REQUEST);
     }
-    
+
 }

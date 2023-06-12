@@ -31,7 +31,7 @@ public class QuadraController {
     }
 
     @GetMapping
-    public ResponseEntity<List<QuadraOutput>> listAll(){
+    public ResponseEntity<List<QuadraOutput>> listAll() {
         List<Quadra> quadras = quadraService.listAll();
         List<QuadraOutput> responseDTOS = quadras.stream()
                 .map(quadra -> modelMapper.map(quadra, QuadraOutput.class))
@@ -40,7 +40,7 @@ public class QuadraController {
     }
 
     @GetMapping("/desativado")
-    public ResponseEntity<List<QuadraOutput>> listAllQuadra(){
+    public ResponseEntity<List<QuadraOutput>> listAllQuadra() {
         List<Quadra> quadras = quadraService.listAllQuadra();
         List<QuadraOutput> responseDTOS = quadras.stream()
                 .map(quadra -> modelMapper.map(quadra, QuadraOutput.class))

@@ -17,7 +17,6 @@ public class JogoService {
     private ModelMapper modelMapper;
     @Autowired
     private final JogoRepository jogoRepository;
-
     @Autowired
     private final RachaService rachaService;
 

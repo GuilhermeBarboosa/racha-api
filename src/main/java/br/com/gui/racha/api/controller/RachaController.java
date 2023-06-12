@@ -31,7 +31,7 @@ public class RachaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RachaOutput>> listAll(){
+    public ResponseEntity<List<RachaOutput>> listAll() {
         List<Racha> rachas = rachaService.listAll();
         List<RachaOutput> responseDTOS = rachas.stream()
                 .map(racha -> modelMapper.map(racha, RachaOutput.class))
@@ -40,7 +40,7 @@ public class RachaController {
     }
 
     @GetMapping("/desativado")
-    public ResponseEntity<List<RachaOutput>> listAllRacha(){
+    public ResponseEntity<List<RachaOutput>> listAllRacha() {
         List<Racha> rachas = rachaService.listAllRacha();
         List<RachaOutput> responseDTOS = rachas.stream()
                 .map(racha -> modelMapper.map(racha, RachaOutput.class))

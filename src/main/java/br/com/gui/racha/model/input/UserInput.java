@@ -15,6 +15,8 @@ public class UserInput {
 
     private String telefone;
 
+    private String cpf;
+
     private String email;
 
     private String senha;

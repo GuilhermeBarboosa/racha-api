@@ -29,7 +29,7 @@ public class JwtService {
     @Autowired
     private UserService userService;
 
-    public String gerarToken(User user){
+    public String gerarToken(User user) {
         long expString = Long.valueOf(expiration);
 
         LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusMinutes(expString);
@@ -55,13 +55,13 @@ public class JwtService {
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
     }
 
-    public boolean tokenValido( String token ){
-        try{
+    public boolean tokenValido(String token) {
+        try {
             Claims claims = obterClaims(token);
             Date dataExpiracao = claims.getExpiration();
             LocalDateTime data = dataExpiracao.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             return !LocalDateTime.now().isAfter(data);
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

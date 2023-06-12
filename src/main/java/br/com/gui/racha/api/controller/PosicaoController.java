@@ -31,7 +31,7 @@ public class PosicaoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PosicaoOutput>> listAll(){
+    public ResponseEntity<List<PosicaoOutput>> listAll() {
         List<Posicao> posicoes = posicaoService.listAll();
         List<PosicaoOutput> responseDTOS = posicoes.stream()
                 .map(posicao -> modelMapper.map(posicao, PosicaoOutput.class))
@@ -40,7 +40,7 @@ public class PosicaoController {
     }
 
     @GetMapping("/desativado")
-    public ResponseEntity<List<PosicaoOutput>> listAllPosicao(){
+    public ResponseEntity<List<PosicaoOutput>> listAllPosicao() {
         List<Posicao> posicoes = posicaoService.listAllPosicao();
         List<PosicaoOutput> responseDTOS = posicoes.stream()
                 .map(posicao -> modelMapper.map(posicao, PosicaoOutput.class))

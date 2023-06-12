@@ -13,6 +13,7 @@ public class UserOutput extends DefaultEntityDTO {
     private String nome;
     private Integer idade;
     private String telefone;
+    private String cpf;
     private String email;
     private String senha;
     private RoleOutput role;

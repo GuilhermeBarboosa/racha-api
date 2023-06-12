@@ -1,6 +1,6 @@
 package br.com.gui.racha.api.service;
 
-import br.com.gui.racha.api.exception.SenhaInvalidaException;
+import br.com.gui.racha.exception.SenhaInvalidaException;
 import br.com.gui.racha.model.entity.Role;
 import br.com.gui.racha.model.entity.User;
 import br.com.gui.racha.model.input.UserInput;
@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -98,11 +97,11 @@ public class UserService implements UserDetailsService {
                 .build();
     }
 
-    public User autenticar(User user){
+    public User autenticar(User user) {
         UserDetails userDetails = loadUserByUsername(user.getEmail());
         boolean senha = passwordEncoder.matches(user.getSenha(), userDetails.getPassword());
-        if(senha){
-           return findByEmail(user.getEmail()).get();
+        if (senha) {
+            return findByEmail(user.getEmail()).get();
         }
         throw new SenhaInvalidaException();
     }

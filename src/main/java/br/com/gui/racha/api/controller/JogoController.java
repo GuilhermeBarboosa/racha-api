@@ -31,7 +31,7 @@ public class JogoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<JogoOutput>> listAll(){
+    public ResponseEntity<List<JogoOutput>> listAll() {
         List<Jogo> quadras = jogoService.listAll();
         List<JogoOutput> responseDTOS = quadras.stream()
                 .map(jogo -> modelMapper.map(jogo, JogoOutput.class))
@@ -40,7 +40,7 @@ public class JogoController {
     }
 
     @GetMapping("/desativado")
-    public ResponseEntity<List<JogoOutput>> listAllPosicao(){
+    public ResponseEntity<List<JogoOutput>> listAllPosicao() {
         List<Jogo> quadras = jogoService.listAllJogo();
         List<JogoOutput> responseDTOS = quadras.stream()
                 .map(jogo -> modelMapper.map(jogo, JogoOutput.class))

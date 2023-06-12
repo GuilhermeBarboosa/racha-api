@@ -14,11 +14,9 @@ public class RoleService {
     @Autowired
     private final RoleRepository roleRepository;
 
-
     public Role findById(Long id) {
         return roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role não encontrada"));
     }
-
 
     public List<Role> listAllRole() {
         return roleRepository.findAll();

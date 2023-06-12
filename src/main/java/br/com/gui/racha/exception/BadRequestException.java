@@ -1,4 +1,4 @@
-package br.com.gui.racha.api.exception;
+package br.com.gui.racha.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

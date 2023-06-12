@@ -35,6 +35,11 @@ public class User  extends DefaultEntity implements Serializable {
     @Column(name = "telefone", nullable = false, length = 30)
     private String telefone;
 
+    @Size(max = 30)
+    @NotNull
+    @Column(name = "cpf", nullable = false, length = 30)
+    private String cpf;
+
     @Size(max = 40)
     @NotNull
     @Column(name = "email", nullable = false, length = 40)
