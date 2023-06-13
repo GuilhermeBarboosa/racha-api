@@ -1,12 +1,15 @@
 package br.com.gui.racha.api.controller;
 
 import br.com.gui.racha.api.service.JogadorRachaService;
+import br.com.gui.racha.model.entity.Jogador;
 import br.com.gui.racha.model.entity.JogadorRacha;
 import br.com.gui.racha.model.input.JogadorRachaInput;
+import br.com.gui.racha.model.output.JogadorOutput;
 import br.com.gui.racha.model.output.JogadorRachaOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/jogadoracha")
+@RequestMapping("/jogadorRacha")
 public class JogadorRachaController {
     @Autowired
     private ModelMapper modelMapper;
@@ -54,6 +57,17 @@ public class JogadorRachaController {
         JogadorRachaOutput jogadorRachaOutput = modelMapper.map(jogadoracha, JogadorRachaOutput.class);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<?>> getByUsuario(@PathVariable Long id) {
+        List<JogadorRacha> jogadores = jogadorRachaService.findByUser(id);
+
+        List<JogadorRachaOutput> responseDTOS = jogadores.stream()
+                .map(jogadoracha -> modelMapper.map(jogadoracha, JogadorRachaOutput.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOS);
+    }
+
 
     @GetMapping("/desativado/{id}")
     public ResponseEntity<JogadorRachaOutput> getByIdDesactived(@PathVariable Long id) {

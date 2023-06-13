@@ -1,12 +1,15 @@
 package br.com.gui.racha.api.controller;
 
 import br.com.gui.racha.api.service.RachaService;
+import br.com.gui.racha.model.entity.Jogador;
 import br.com.gui.racha.model.entity.Racha;
 import br.com.gui.racha.model.input.RachaInput;
+import br.com.gui.racha.model.output.JogadorOutput;
 import br.com.gui.racha.model.output.RachaOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
