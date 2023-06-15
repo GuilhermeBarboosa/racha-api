@@ -25,10 +25,14 @@ public class JogadorController {
     private final JogadorService jogadorService;
 
     @PostMapping
-    public ResponseEntity<JogadorOutput> save(@Valid @RequestBody JogadorInput jogadorInput) {
-        Jogador createdJogador = jogadorService.save(jogadorInput);
-        JogadorOutput jogadorOutput = modelMapper.map(createdJogador, JogadorOutput.class);
-        return ResponseEntity.ok(jogadorOutput);
+    public ResponseEntity<?> save(@Valid @RequestBody JogadorInput jogadorInput) {
+        if(jogadorService.findByUser(jogadorInput.getUser()) != null){
+            return new ResponseEntity<String>("Jogador já cadastrado", HttpStatus.BAD_REQUEST);
+        }else{
+            Jogador createdJogador = jogadorService.save(jogadorInput);
+            JogadorOutput jogadorOutput = modelMapper.map(createdJogador, JogadorOutput.class);
+            return ResponseEntity.ok(jogadorOutput);
+        }
     }
 
     @GetMapping

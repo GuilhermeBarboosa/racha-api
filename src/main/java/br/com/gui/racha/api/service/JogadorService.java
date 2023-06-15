@@ -26,6 +26,8 @@ public class JogadorService {
 
     public Jogador save(JogadorInput jogadorInput) {
         Jogador jogador = modelMapper.map(jogadorInput, Jogador.class);
+        jogador.setPosicao(posicaoService.findById(jogadorInput.getPosicao()));
+        jogador.setUser(userService.findById(jogadorInput.getUser()));
         return jogadorRepository.save(jogador);
     }
 

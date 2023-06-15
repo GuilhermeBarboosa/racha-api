@@ -50,4 +50,8 @@ public class PosicaoService {
     public Posicao findByIdDesactived(Long id) {
         return posicaoRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Posição não encontrada"));
     }
+
+    public List<Posicao> getAllPosicoes(String posicao) {
+        return posicaoRepository.findAllDesc(posicao);
+    }
 }

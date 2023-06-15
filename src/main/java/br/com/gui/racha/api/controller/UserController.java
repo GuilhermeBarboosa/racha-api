@@ -69,6 +69,14 @@ public class UserController {
         UserOutput userOutput = modelMapper.map(user, UserOutput.class);
         return ResponseEntity.ok(userOutput);
     }
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<List<UserOutput>> getByCpf(@PathVariable String cpf) {
+        List<User> users = userService.findByCpf(cpf);
+        List<UserOutput> responseDTOS = users.stream()
+                .map(user -> modelMapper.map(user, UserOutput.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOS);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody @Valid UserInput userInput) {

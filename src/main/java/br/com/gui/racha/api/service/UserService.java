@@ -105,4 +105,8 @@ public class UserService implements UserDetailsService {
         }
         throw new SenhaInvalidaException();
     }
+
+    public List<User> findByCpf(String cpf) {
+        return userRepository.findByCpf(cpf);
+    }
 }

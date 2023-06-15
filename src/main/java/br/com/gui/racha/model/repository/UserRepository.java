@@ -26,4 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByIdDesactived(Long id);
 
     Optional<User> findByEmail(String email);
+
+    @Query("select u from User u where u.cpf like %:cpf%")
+    List<User> findByCpf(String cpf);
 }

@@ -39,6 +39,16 @@ public class PosicaoController {
         return ResponseEntity.ok(responseDTOS);
     }
 
+    @GetMapping("/desc/{posicao}")
+    public ResponseEntity<List<PosicaoOutput>> getAllPosicoes(@PathVariable String posicao) {
+        List<Posicao> posicoes = posicaoService.getAllPosicoes(posicao);
+        List<PosicaoOutput> responseDTOS = posicoes.stream()
+                .map(pos -> modelMapper.map(pos, PosicaoOutput.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOS);
+    }
+
+
     @GetMapping("/desativado")
     public ResponseEntity<List<PosicaoOutput>> listAllPosicao() {
         List<Posicao> posicoes = posicaoService.listAllPosicao();

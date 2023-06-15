@@ -23,4 +23,6 @@ public interface PosicaoRepository extends JpaRepository<Posicao, Long> {
 
     @Query("select p from Posicao p where p.id = :id")
     Optional<Posicao> findByIdDesactived(Long id);
+    @Query("select p from Posicao p where p.posicao like %:posicao%")
+    List<Posicao> findAllDesc(String posicao);
 }
