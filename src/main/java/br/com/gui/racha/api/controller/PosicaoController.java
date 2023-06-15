@@ -7,6 +7,7 @@ import br.com.gui.racha.model.output.PosicaoOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +25,14 @@ public class PosicaoController {
     private final PosicaoService posicaoService;
 
     @PostMapping
-    public ResponseEntity<PosicaoOutput> save(@Valid @RequestBody PosicaoInput posicaoInput) {
-        Posicao createdPosicao = posicaoService.save(posicaoInput);
-        PosicaoOutput posicaoOutput = modelMapper.map(createdPosicao, PosicaoOutput.class);
-        return ResponseEntity.ok(posicaoOutput);
+    public ResponseEntity<?> save(@Valid @RequestBody PosicaoInput posicaoInput) {
+        if(posicaoService.getAllPosicoes(posicaoInput.getPosicao()) != null){
+            return new ResponseEntity<String>("Posição já cadastrada", HttpStatus.BAD_REQUEST);
+        }else{
+            Posicao createdPosicao = posicaoService.save(posicaoInput);
+            PosicaoOutput posicaoOutput = modelMapper.map(createdPosicao, PosicaoOutput.class);
+            return ResponseEntity.ok(posicaoOutput);
+        }
     }
 
     @GetMapping
