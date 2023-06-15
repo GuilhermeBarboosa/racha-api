@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -64,7 +65,7 @@ public class JogadorService {
         return jogadorRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Jogador não encontrada"));
     }
 
-    public Jogador findByUser(Long id) {
-        return jogadorRepository.findByUserId(id).orElseThrow(() -> new RuntimeException("Jogador não encontrada"));
+    public Optional<Jogador> findByUser(Long id) {
+        return jogadorRepository.findByUserId(id);
     }
 }

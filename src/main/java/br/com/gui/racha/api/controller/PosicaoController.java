@@ -26,7 +26,7 @@ public class PosicaoController {
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody PosicaoInput posicaoInput) {
-        if(posicaoService.getAllPosicoes(posicaoInput.getPosicao()) != null){
+        if(!posicaoService.getAllPosicoes(posicaoInput.getPosicao()).isEmpty()){
             return new ResponseEntity<String>("Posição já cadastrada", HttpStatus.BAD_REQUEST);
         }else{
             Posicao createdPosicao = posicaoService.save(posicaoInput);

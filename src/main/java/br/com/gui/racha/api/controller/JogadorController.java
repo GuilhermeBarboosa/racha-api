@@ -26,7 +26,7 @@ public class JogadorController {
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody JogadorInput jogadorInput) {
-        if(jogadorService.findByUser(jogadorInput.getUser()) != null){
+        if(jogadorService.findByUser(jogadorInput.getUser()).isPresent()){
             return new ResponseEntity<String>("Jogador já cadastrado", HttpStatus.BAD_REQUEST);
         }else{
             Jogador createdJogador = jogadorService.save(jogadorInput);
@@ -63,7 +63,7 @@ public class JogadorController {
 
     @GetMapping("/usuario/{id}")
     public ResponseEntity<?> getByUsuario(@PathVariable Long id) {
-        Jogador jogador = jogadorService.findByUser(id);
+        Jogador jogador = jogadorService.findByUser(id).get();
         if (jogador == null) {
             return new ResponseEntity<String>("Jogador não encontrado", HttpStatus.BAD_REQUEST);
         } else {
