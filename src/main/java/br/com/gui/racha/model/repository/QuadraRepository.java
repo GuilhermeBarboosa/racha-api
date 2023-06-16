@@ -12,15 +12,9 @@ import java.util.Optional;
 public interface QuadraRepository extends JpaRepository<Quadra, Long> {
 
 
-    @Override
-    @Query("select q from Quadra q where q.actived = true")
     List<Quadra> findAll();
 
-    @Query("select q from Quadra q where q.actived = true and q.id = :id")
     Optional<Quadra> findById(Long id);
-
-    @Query("select q from Quadra q")
-    List<Quadra> findAllQuadra();
 
     @Query("select q from Quadra q where q.id = :id")
     Optional<Quadra> findByIdDesactived(Long id);

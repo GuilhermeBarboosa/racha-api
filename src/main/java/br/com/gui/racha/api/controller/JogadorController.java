@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,8 +27,16 @@ public class JogadorController {
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody JogadorInput jogadorInput) {
-        if(jogadorService.findByUser(jogadorInput.getUser()).isPresent()){
-            return new ResponseEntity<String>("Jogador já cadastrado", HttpStatus.BAD_REQUEST);
+        System.out.println(jogadorInput);
+        Optional<Jogador> findJogador = jogadorService.findByUser(jogadorInput.getUser());
+        System.out.println(findJogador);
+        if(findJogador.isPresent()){
+            if(jogadorService.findByUser(jogadorInput.getUser()).get().getActived()){
+                return new ResponseEntity<String>("Jogador já cadastrado", HttpStatus.BAD_REQUEST);
+            }else{
+                jogadorService.updateById(findJogador.get().getId(), jogadorInput);
+                return ResponseEntity.ok(new JogadorOutput(findJogador.get()));
+            }
         }else{
             Jogador createdJogador = jogadorService.save(jogadorInput);
             JogadorOutput jogadorOutput = new JogadorOutput(createdJogador);

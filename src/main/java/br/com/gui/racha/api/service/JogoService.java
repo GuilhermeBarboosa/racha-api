@@ -49,7 +49,7 @@ public class JogoService {
     }
 
     public List<Jogo> listAllJogo() {
-        return jogoRepository.findAllJogos();
+        return jogoRepository.findAll();
     }
 
     public Jogo findByIdDesactived(Long id) {

@@ -47,6 +47,7 @@ public class JogadorService {
         jogador.setGols(jogadorInput.getGols());
         jogador.setPosicao(posicaoService.findById(jogadorInput.getPosicao()));
         jogador.setUser(userService.findById(jogadorInput.getUser()));
+        jogador.setActived(true);
 
         return jogadorRepository.save(jogador);
     }
@@ -58,7 +59,7 @@ public class JogadorService {
     }
 
     public List<Jogador> listAllJogador() {
-        return jogadorRepository.findAllJogador();
+        return jogadorRepository.findAll();
     }
 
     public Jogador findByIdDesactived(Long id) {

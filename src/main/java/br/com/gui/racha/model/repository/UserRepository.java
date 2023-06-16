@@ -11,12 +11,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-
-//    @Override
-//    @Query("select u from User u where u.actived = true")
     List<User> findAll();
 
-    @Query("select u from User u where u.actived = true and u.id = :id")
     Optional<User> findById(Long id);
 
     @Query("select u from User u where u.actived = false")

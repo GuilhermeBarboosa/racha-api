@@ -1,5 +1,6 @@
 package br.com.gui.racha.model.input;
 
+import br.com.gui.racha.model.entity.Jogador;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,6 @@ public class JogadorInput {
     private Integer gols;
 
     private Integer assistencias;
+
+
 }

@@ -12,15 +12,10 @@ import java.util.Optional;
 public interface JogoRepository extends JpaRepository<Jogo, Long> {
 
 
-    @Override
-    @Query("select j from Jogo j where j.actived = true")
     List<Jogo> findAll();
 
-    @Query("select j from Jogo j where j.actived = true and j.id = :id")
     Optional<Jogo> findById(Long id);
 
-    @Query("select j from Jogo j")
-    List<Jogo> findAllJogos();
 
     @Query("select j from Jogo j where j.id = :id")
     Optional<Jogo> findByIdDesactived(Long id);

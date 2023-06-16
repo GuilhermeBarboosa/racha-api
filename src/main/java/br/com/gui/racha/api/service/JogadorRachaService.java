@@ -53,7 +53,7 @@ public class JogadorRachaService {
     }
 
     public List<JogadorRacha> listAllJogadorRacha() {
-        return jogadorRachaRepository.findAllJogadorRacha();
+        return jogadorRachaRepository.findAll();
     }
 
     public JogadorRacha findByIdDesactived(Long id) {

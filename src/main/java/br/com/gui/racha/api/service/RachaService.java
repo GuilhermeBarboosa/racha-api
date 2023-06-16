@@ -52,7 +52,7 @@ public class RachaService {
     }
 
     public List<Racha> listAllRacha() {
-        return rachaRepository.findAllQuadra();
+        return rachaRepository.findAll();
     }
 
     public Racha findByIdDesactived(Long id) {

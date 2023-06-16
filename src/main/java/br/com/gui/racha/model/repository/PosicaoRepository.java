@@ -11,18 +11,13 @@ import java.util.Optional;
 @Repository
 public interface PosicaoRepository extends JpaRepository<Posicao, Long> {
 
-    @Override
-    @Query("select p from Posicao p where p.actived = true")
     List<Posicao> findAll();
 
-    @Query("select p from Posicao p where p.actived = true and p.id = :id")
     Optional<Posicao> findById(Long id);
-
-    @Query("select p from Posicao p")
-    List<Posicao> findAllPosicao();
 
     @Query("select p from Posicao p where p.id = :id")
     Optional<Posicao> findByIdDesactived(Long id);
+
     @Query("select p from Posicao p where p.posicao like %:posicao%")
     List<Posicao> findAllDesc(String posicao);
 }

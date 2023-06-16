@@ -44,7 +44,7 @@ public class QuadraService {
     }
 
     public List<Quadra> listAllQuadra() {
-        return quadraRepository.findAllQuadra();
+        return quadraRepository.findAll();
     }
 
     public Quadra findByIdDesactived(Long id) {

@@ -44,7 +44,7 @@ public class PosicaoService {
     }
 
     public List<Posicao> listAllPosicao() {
-        return posicaoRepository.findAllPosicao();
+        return posicaoRepository.findAll();
     }
 
     public Posicao findByIdDesactived(Long id) {

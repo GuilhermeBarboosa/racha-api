@@ -11,15 +11,8 @@ import java.util.Optional;
 @Repository
 public interface JogadorRachaRepository extends JpaRepository<JogadorRacha, Long> {
 
-    @Override
-    @Query("select jr from JogadorRacha jr where jr.actived = true")
     List<JogadorRacha> findAll();
-
-    @Query("select jr from JogadorRacha jr where jr.actived = true and jr.id = :id")
     Optional<JogadorRacha> findById(Long id);
-
-    @Query("select jr from JogadorRacha jr")
-    List<JogadorRacha> findAllJogadorRacha();
 
     @Query("select jr from JogadorRacha jr where jr.id = :id")
     Optional<JogadorRacha> findByIdDesactived(Long id);
