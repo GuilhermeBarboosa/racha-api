@@ -33,7 +33,7 @@ public class UserController {
             return new ResponseEntity<String>("Email já cadastrado", HttpStatus.BAD_REQUEST);
         } else {
             User createdUser = userService.save(userInput);
-            UserOutput userOutput = modelMapper.map(createdUser, UserOutput.class);
+            UserOutput userOutput = new UserOutput(createdUser);
             return ResponseEntity.ok(userOutput);
         }
     }
@@ -42,7 +42,7 @@ public class UserController {
     public ResponseEntity<List<UserOutput>> listAll() {
         List<User> users = userService.listAll();
         List<UserOutput> responseDTOS = users.stream()
-                .map(user -> modelMapper.map(user, UserOutput.class))
+                .map(UserOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -51,7 +51,7 @@ public class UserController {
     public ResponseEntity<List<UserOutput>> listAllUser() {
         List<User> users = userService.listAllUserDesactived();
         List<UserOutput> responseDTOS = users.stream()
-                .map(user -> modelMapper.map(user, UserOutput.class))
+                .map(UserOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -59,21 +59,21 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserOutput> getById(@PathVariable Long id) {
         User user = userService.findById(id);
-        UserOutput userOutput = modelMapper.map(user, UserOutput.class);
+        UserOutput userOutput = new UserOutput(user);
         return ResponseEntity.ok(userOutput);
     }
 
     @GetMapping("/desativado/{id}")
     public ResponseEntity<UserOutput> getByIdDesactived(@PathVariable Long id) {
         User user = userService.findByIdDesactived(id);
-        UserOutput userOutput = modelMapper.map(user, UserOutput.class);
+        UserOutput userOutput = new UserOutput(user);
         return ResponseEntity.ok(userOutput);
     }
     @GetMapping("/cpf/{cpf}")
     public ResponseEntity<List<UserOutput>> getByCpf(@PathVariable String cpf) {
         List<User> users = userService.findByCpf(cpf);
         List<UserOutput> responseDTOS = users.stream()
-                .map(user -> modelMapper.map(user, UserOutput.class))
+                .map(UserOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -84,7 +84,7 @@ public class UserController {
         if (updatedUser == null) {
             return new ResponseEntity<String>("Senha igual a anterior", HttpStatus.BAD_REQUEST);
         } else {
-            UserOutput userOutput = modelMapper.map(updatedUser, UserOutput.class);
+            UserOutput userOutput = new UserOutput(updatedUser);
             return ResponseEntity.ok(userOutput);
         }
     }
@@ -92,14 +92,14 @@ public class UserController {
     @PutMapping("/ativar/{id}")
     public ResponseEntity<?> ativarById(@PathVariable Long id) {
         User updatedUser = userService.ativarById(id);
-        UserOutput userOutput = modelMapper.map(updatedUser, UserOutput.class);
+        UserOutput userOutput = new UserOutput(updatedUser);
         return ResponseEntity.ok(userOutput);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UserOutput> deactivateById(@PathVariable Long id) {
         User deactivatedUser = userService.deactivateById(id);
-        UserOutput userOutput = modelMapper.map(deactivatedUser, UserOutput.class);
+        UserOutput userOutput = new UserOutput(deactivatedUser);
         return ResponseEntity.ok(userOutput);
     }
 }

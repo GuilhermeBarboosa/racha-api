@@ -30,7 +30,7 @@ public class PosicaoController {
             return new ResponseEntity<String>("Posição já cadastrada", HttpStatus.BAD_REQUEST);
         }else{
             Posicao createdPosicao = posicaoService.save(posicaoInput);
-            PosicaoOutput posicaoOutput = modelMapper.map(createdPosicao, PosicaoOutput.class);
+            PosicaoOutput posicaoOutput = new PosicaoOutput(createdPosicao);
             return ResponseEntity.ok(posicaoOutput);
         }
     }
@@ -39,7 +39,7 @@ public class PosicaoController {
     public ResponseEntity<List<PosicaoOutput>> listAll() {
         List<Posicao> posicoes = posicaoService.listAll();
         List<PosicaoOutput> responseDTOS = posicoes.stream()
-                .map(posicao -> modelMapper.map(posicao, PosicaoOutput.class))
+                .map(PosicaoOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -48,7 +48,7 @@ public class PosicaoController {
     public ResponseEntity<List<PosicaoOutput>> getAllPosicoes(@PathVariable String posicao) {
         List<Posicao> posicoes = posicaoService.getAllPosicoes(posicao);
         List<PosicaoOutput> responseDTOS = posicoes.stream()
-                .map(pos -> modelMapper.map(pos, PosicaoOutput.class))
+                .map(PosicaoOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -58,7 +58,7 @@ public class PosicaoController {
     public ResponseEntity<List<PosicaoOutput>> listAllPosicao() {
         List<Posicao> posicoes = posicaoService.listAllPosicao();
         List<PosicaoOutput> responseDTOS = posicoes.stream()
-                .map(posicao -> modelMapper.map(posicao, PosicaoOutput.class))
+                .map(PosicaoOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -66,28 +66,28 @@ public class PosicaoController {
     @GetMapping("/{id}")
     public ResponseEntity<PosicaoOutput> getById(@PathVariable Long id) {
         Posicao posicao = posicaoService.findById(id);
-        PosicaoOutput posicaoOutput = modelMapper.map(posicao, PosicaoOutput.class);
+        PosicaoOutput posicaoOutput = new PosicaoOutput(posicao);
         return ResponseEntity.ok(posicaoOutput);
     }
 
     @GetMapping("/desativado/{id}")
     public ResponseEntity<PosicaoOutput> getByIdDesactived(@PathVariable Long id) {
         Posicao posicao = posicaoService.findByIdDesactived(id);
-        PosicaoOutput posicaoOutput = modelMapper.map(posicao, PosicaoOutput.class);
+        PosicaoOutput posicaoOutput = new PosicaoOutput(posicao);
         return ResponseEntity.ok(posicaoOutput);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PosicaoOutput> updateById(@PathVariable Long id, @RequestBody @Valid PosicaoInput posicaoInput) {
         Posicao updatedPosicao = posicaoService.updateById(id, posicaoInput);
-        PosicaoOutput posicaoOutput = modelMapper.map(updatedPosicao, PosicaoOutput.class);
+        PosicaoOutput posicaoOutput = new PosicaoOutput(updatedPosicao);
         return ResponseEntity.ok(posicaoOutput);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<PosicaoOutput> deactivateById(@PathVariable Long id) {
         Posicao deactivatedPosicao = posicaoService.deactivateById(id);
-        PosicaoOutput posicaoOutput = modelMapper.map(deactivatedPosicao, PosicaoOutput.class);
+        PosicaoOutput posicaoOutput = new PosicaoOutput(deactivatedPosicao);
         return ResponseEntity.ok(posicaoOutput);
     }
 }

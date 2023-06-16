@@ -1,6 +1,7 @@
 package br.com.gui.racha.model.output;
 
 import br.com.gui.racha.model.defaults.DefaultEntityDTO;
+import br.com.gui.racha.model.entity.Quadra;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,5 +12,13 @@ import lombok.NoArgsConstructor;
 public class QuadraOutput extends DefaultEntityDTO {
     private Long id;
     private String nome;
+
+    public QuadraOutput(Quadra quadra) {
+        this.id = quadra.getId();
+        this.nome = quadra.getNome();
+        this.setActived(quadra.getActived());
+        this.setCreated(quadra.getCreated());
+        this.setUpdated(quadra.getUpdated());
+    }
 
 }

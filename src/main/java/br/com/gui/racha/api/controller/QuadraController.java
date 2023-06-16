@@ -26,7 +26,7 @@ public class QuadraController {
     @PostMapping
     public ResponseEntity<QuadraOutput> save(@Valid @RequestBody QuadraInput quadraInput) {
         Quadra createdQuadra = quadraService.save(quadraInput);
-        QuadraOutput quadraOutput = modelMapper.map(createdQuadra, QuadraOutput.class);
+        QuadraOutput quadraOutput = new QuadraOutput(createdQuadra);
         return ResponseEntity.ok(quadraOutput);
     }
 
@@ -34,7 +34,7 @@ public class QuadraController {
     public ResponseEntity<List<QuadraOutput>> listAll() {
         List<Quadra> quadras = quadraService.listAll();
         List<QuadraOutput> responseDTOS = quadras.stream()
-                .map(quadra -> modelMapper.map(quadra, QuadraOutput.class))
+                .map(QuadraOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -43,7 +43,7 @@ public class QuadraController {
     public ResponseEntity<List<QuadraOutput>> listAllQuadra() {
         List<Quadra> quadras = quadraService.listAllQuadra();
         List<QuadraOutput> responseDTOS = quadras.stream()
-                .map(quadra -> modelMapper.map(quadra, QuadraOutput.class))
+                .map(QuadraOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -51,28 +51,28 @@ public class QuadraController {
     @GetMapping("/{id}")
     public ResponseEntity<QuadraOutput> getById(@PathVariable Long id) {
         Quadra quadra = quadraService.findById(id);
-        QuadraOutput quadraOutput = modelMapper.map(quadra, QuadraOutput.class);
+        QuadraOutput quadraOutput = new QuadraOutput(quadra);
         return ResponseEntity.ok(quadraOutput);
     }
 
     @GetMapping("/desativado/{id}")
     public ResponseEntity<QuadraOutput> getByIdDesactived(@PathVariable Long id) {
         Quadra quadra = quadraService.findByIdDesactived(id);
-        QuadraOutput quadraOutput = modelMapper.map(quadra, QuadraOutput.class);
+        QuadraOutput quadraOutput = new QuadraOutput(quadra);
         return ResponseEntity.ok(quadraOutput);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<QuadraOutput> updateById(@PathVariable Long id, @RequestBody @Valid QuadraInput quadraInput) {
         Quadra updatedQuadra = quadraService.updateById(id, quadraInput);
-        QuadraOutput quadraOutput = modelMapper.map(updatedQuadra, QuadraOutput.class);
+        QuadraOutput quadraOutput = new QuadraOutput(updatedQuadra);
         return ResponseEntity.ok(quadraOutput);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<QuadraOutput> deactivateById(@PathVariable Long id) {
         Quadra deactivatedQuadra = quadraService.deactivateById(id);
-        QuadraOutput quadraOutput = modelMapper.map(deactivatedQuadra, QuadraOutput.class);
+        QuadraOutput quadraOutput = new QuadraOutput(deactivatedQuadra);
         return ResponseEntity.ok(quadraOutput);
     }
 }

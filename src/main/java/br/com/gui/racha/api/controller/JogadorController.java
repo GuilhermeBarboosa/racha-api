@@ -30,7 +30,7 @@ public class JogadorController {
             return new ResponseEntity<String>("Jogador já cadastrado", HttpStatus.BAD_REQUEST);
         }else{
             Jogador createdJogador = jogadorService.save(jogadorInput);
-            JogadorOutput jogadorOutput = modelMapper.map(createdJogador, JogadorOutput.class);
+            JogadorOutput jogadorOutput = new JogadorOutput(createdJogador);
             return ResponseEntity.ok(jogadorOutput);
         }
     }
@@ -40,7 +40,7 @@ public class JogadorController {
         List<Jogador> users = jogadorService.listAll();
         List<JogadorOutput> responseDTOS =
                 users.stream()
-                        .map(jogador -> modelMapper.map(jogador, JogadorOutput.class))
+                        .map(JogadorOutput::new)
                         .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -49,7 +49,7 @@ public class JogadorController {
     public ResponseEntity<List<JogadorOutput>> listAllJogador() {
         List<Jogador> users = jogadorService.listAllJogador();
         List<JogadorOutput> responseDTOS = users.stream()
-                .map(jogador -> modelMapper.map(jogador, JogadorOutput.class))
+                .map(JogadorOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -57,7 +57,7 @@ public class JogadorController {
     @GetMapping("/{id}")
     public ResponseEntity<JogadorOutput> getById(@PathVariable Long id) {
         Jogador jogador = jogadorService.findById(id);
-        JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
+        JogadorOutput jogadorOutput = new JogadorOutput(jogador);
         return ResponseEntity.ok(jogadorOutput);
     }
 
@@ -67,7 +67,7 @@ public class JogadorController {
         if (jogador == null) {
             return new ResponseEntity<String>("Jogador não encontrado", HttpStatus.BAD_REQUEST);
         } else {
-            JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
+            JogadorOutput jogadorOutput = new JogadorOutput(jogador);
             return ResponseEntity.ok(jogadorOutput);
         }
     }
@@ -75,21 +75,21 @@ public class JogadorController {
     @GetMapping("/desativado/{id}")
     public ResponseEntity<JogadorOutput> getByIdDesactived(@PathVariable Long id) {
         Jogador jogador = jogadorService.findByIdDesactived(id);
-        JogadorOutput jogadorOutput = modelMapper.map(jogador, JogadorOutput.class);
+        JogadorOutput jogadorOutput = new JogadorOutput(jogador);
         return ResponseEntity.ok(jogadorOutput);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<JogadorOutput> updateById(@PathVariable Long id, @RequestBody @Valid JogadorInput jogadorInput) {
         Jogador updatedJogador = jogadorService.updateById(id, jogadorInput);
-        JogadorOutput jogadorOutput = modelMapper.map(updatedJogador, JogadorOutput.class);
+        JogadorOutput jogadorOutput = new JogadorOutput(updatedJogador);
         return ResponseEntity.ok(jogadorOutput);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<JogadorOutput> deactivateById(@PathVariable Long id) {
         Jogador deactivatedJogador = jogadorService.deactivateById(id);
-        JogadorOutput jogadorOutput = modelMapper.map(deactivatedJogador, JogadorOutput.class);
+        JogadorOutput jogadorOutput = new JogadorOutput(deactivatedJogador);
         return ResponseEntity.ok(jogadorOutput);
     }
 }

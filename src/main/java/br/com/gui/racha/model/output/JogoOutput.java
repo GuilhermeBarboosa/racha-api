@@ -1,6 +1,7 @@
 package br.com.gui.racha.model.output;
 
 import br.com.gui.racha.model.defaults.DefaultEntityDTO;
+import br.com.gui.racha.model.entity.Jogo;
 import br.com.gui.racha.model.entity.Racha;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +15,30 @@ import java.time.LocalDateTime;
 public class JogoOutput extends DefaultEntityDTO {
     private Long id;
     private LocalDateTime data;
-
     private Integer valorPago;
 
-    private RachaOutput racha;
+    //    Racha
+    private Long idRacha;
+    private String nomeRacha;
+    private Integer caixa;
+
+    //    Quadra
+    private Long idQuadra;
+    private String nomeQuadra;
+
+    public JogoOutput(Jogo jogo){
+        this.id = jogo.getId();
+        this.data = jogo.getData();
+        this.valorPago = jogo.getValorPago();
+        this.idRacha = jogo.getRacha().getId();
+        this.nomeRacha = jogo.getRacha().getNome();
+        this.caixa = jogo.getRacha().getCaixa();
+        this.idQuadra = jogo.getRacha().getQuadra().getId();
+        this.nomeQuadra = jogo.getRacha().getQuadra().getNome();
+        this.setActived(jogo.getActived());
+        this.setCreated(jogo.getCreated());
+        this.setUpdated(jogo.getUpdated());
+    }
+
 
 }

@@ -29,7 +29,7 @@ public class RoleController {
     public ResponseEntity<List<RoleOutput>> listAll() {
         List<Role> roles = roleService.listAllRole();
         List<RoleOutput> responseDTOS = roles.stream()
-                .map(role -> modelMapper.map(role, RoleOutput.class))
+                .map(RoleOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -38,7 +38,7 @@ public class RoleController {
     @GetMapping("/{id}")
     public ResponseEntity<RoleOutput> getById(@PathVariable Long id) {
         Role role = roleService.findById(id);
-        RoleOutput roleOutput = modelMapper.map(role, RoleOutput.class);
+        RoleOutput roleOutput = new RoleOutput(role);
         return ResponseEntity.ok(roleOutput);
     }
 

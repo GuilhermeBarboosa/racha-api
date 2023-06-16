@@ -29,7 +29,7 @@ public class RachaController {
     @PostMapping
     public ResponseEntity<RachaOutput> save(@Valid @RequestBody RachaInput rachaInput) {
         Racha createdRacha = rachaService.save(rachaInput);
-        RachaOutput rachaOutput = modelMapper.map(createdRacha, RachaOutput.class);
+        RachaOutput rachaOutput = new RachaOutput(createdRacha);
         return ResponseEntity.ok(rachaOutput);
     }
 
@@ -37,7 +37,7 @@ public class RachaController {
     public ResponseEntity<List<RachaOutput>> listAll() {
         List<Racha> rachas = rachaService.listAll();
         List<RachaOutput> responseDTOS = rachas.stream()
-                .map(racha -> modelMapper.map(racha, RachaOutput.class))
+                .map(RachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -46,7 +46,7 @@ public class RachaController {
     public ResponseEntity<List<RachaOutput>> listAllRacha() {
         List<Racha> rachas = rachaService.listAllRacha();
         List<RachaOutput> responseDTOS = rachas.stream()
-                .map(racha -> modelMapper.map(racha, RachaOutput.class))
+                .map(RachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -54,28 +54,28 @@ public class RachaController {
     @GetMapping("/{id}")
     public ResponseEntity<RachaOutput> getById(@PathVariable Long id) {
         Racha racha = rachaService.findById(id);
-        RachaOutput rachaOutput = modelMapper.map(racha, RachaOutput.class);
+        RachaOutput rachaOutput = new RachaOutput(racha);
         return ResponseEntity.ok(rachaOutput);
     }
 
     @GetMapping("/desativado/{id}")
     public ResponseEntity<RachaOutput> getByIdDesactived(@PathVariable Long id) {
         Racha racha = rachaService.findByIdDesactived(id);
-        RachaOutput rachaOutput = modelMapper.map(racha, RachaOutput.class);
+        RachaOutput rachaOutput = new RachaOutput(racha);
         return ResponseEntity.ok(rachaOutput);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<RachaOutput> updateById(@PathVariable Long id, @RequestBody @Valid RachaInput rachaInput) {
         Racha updatedRacha = rachaService.updateById(id, rachaInput);
-        RachaOutput rachaOutput = modelMapper.map(updatedRacha, RachaOutput.class);
+        RachaOutput rachaOutput = new RachaOutput(updatedRacha);
         return ResponseEntity.ok(rachaOutput);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<RachaOutput> deactivateById(@PathVariable Long id) {
         Racha deactivatedRacha = rachaService.deactivateById(id);
-        RachaOutput rachaOutput = modelMapper.map(deactivatedRacha, RachaOutput.class);
+        RachaOutput rachaOutput = new RachaOutput(deactivatedRacha);
         return ResponseEntity.ok(rachaOutput);
     }
 }

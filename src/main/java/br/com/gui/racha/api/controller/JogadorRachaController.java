@@ -29,7 +29,7 @@ public class JogadorRachaController {
     @PostMapping
     public ResponseEntity<JogadorRachaOutput> save(@Valid @RequestBody JogadorRachaInput jogadorRachaInput) {
         JogadorRacha createdJogadorRacha = jogadorRachaService.save(jogadorRachaInput);
-        JogadorRachaOutput jogadorRachaOutput = modelMapper.map(createdJogadorRacha, JogadorRachaOutput.class);
+        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(createdJogadorRacha);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 
@@ -37,7 +37,7 @@ public class JogadorRachaController {
     public ResponseEntity<List<JogadorRachaOutput>> listAll() {
         List<JogadorRacha> jogadores = jogadorRachaService.listAll();
         List<JogadorRachaOutput> responseDTOS = jogadores.stream()
-                .map(jogadoracha -> modelMapper.map(jogadoracha, JogadorRachaOutput.class))
+                .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -46,7 +46,7 @@ public class JogadorRachaController {
     public ResponseEntity<List<JogadorRachaOutput>> listAllPosicao() {
         List<JogadorRacha> jogadores = jogadorRachaService.listAllJogadorRacha();
         List<JogadorRachaOutput> responseDTOS = jogadores.stream()
-                .map(jogadoracha -> modelMapper.map(jogadoracha, JogadorRachaOutput.class))
+                .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -54,7 +54,7 @@ public class JogadorRachaController {
     @GetMapping("/{id}")
     public ResponseEntity<JogadorRachaOutput> getById(@PathVariable Long id) {
         JogadorRacha jogadoracha = jogadorRachaService.findById(id);
-        JogadorRachaOutput jogadorRachaOutput = modelMapper.map(jogadoracha, JogadorRachaOutput.class);
+        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(jogadoracha);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 
@@ -63,7 +63,7 @@ public class JogadorRachaController {
         List<JogadorRacha> jogadores = jogadorRachaService.findByUser(id);
 
         List<JogadorRachaOutput> responseDTOS = jogadores.stream()
-                .map(jogadoracha -> modelMapper.map(jogadoracha, JogadorRachaOutput.class))
+                .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
@@ -72,21 +72,21 @@ public class JogadorRachaController {
     @GetMapping("/desativado/{id}")
     public ResponseEntity<JogadorRachaOutput> getByIdDesactived(@PathVariable Long id) {
         JogadorRacha jogadoracha = jogadorRachaService.findByIdDesactived(id);
-        JogadorRachaOutput jogadorRachaOutput = modelMapper.map(jogadoracha, JogadorRachaOutput.class);
+        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(jogadoracha);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<JogadorRachaOutput> updateById(@PathVariable Long id, @RequestBody @Valid JogadorRachaInput jogadorRachaInput) {
         JogadorRacha updatedJogadorRacha = jogadorRachaService.updateById(id, jogadorRachaInput);
-        JogadorRachaOutput jogadorRachaOutput = modelMapper.map(updatedJogadorRacha, JogadorRachaOutput.class);
+        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(updatedJogadorRacha);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<JogadorRachaOutput> deactivateById(@PathVariable Long id) {
         JogadorRacha deactivatedJogadorRacha = jogadorRachaService.deactivateById(id);
-        JogadorRachaOutput jogadorRachaOutput = modelMapper.map(deactivatedJogadorRacha, JogadorRachaOutput.class);
+        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(deactivatedJogadorRacha);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 }
