@@ -1,10 +1,13 @@
 package br.com.gui.racha.model.output;
 
 import br.com.gui.racha.model.defaults.DefaultEntityDTO;
+import br.com.gui.racha.model.entity.Jogador;
 import br.com.gui.racha.model.entity.Racha;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor

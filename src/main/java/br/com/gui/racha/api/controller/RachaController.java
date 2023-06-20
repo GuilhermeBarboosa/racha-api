@@ -58,6 +58,15 @@ public class RachaController {
         return ResponseEntity.ok(rachaOutput);
     }
 
+    @GetMapping("/quadra/{id}")
+    public ResponseEntity<List<RachaOutput>> getByIdQuadra(@PathVariable Long id) {
+        List<Racha> rachas = rachaService.findByIdQuadra(id);
+        List<RachaOutput> responseDTOS = rachas.stream()
+                .map(RachaOutput::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOS);
+    }
+
     @GetMapping("/desativado/{id}")
     public ResponseEntity<RachaOutput> getByIdDesactived(@PathVariable Long id) {
         Racha racha = rachaService.findByIdDesactived(id);

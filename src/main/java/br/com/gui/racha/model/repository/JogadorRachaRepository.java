@@ -18,4 +18,7 @@ public interface JogadorRachaRepository extends JpaRepository<JogadorRacha, Long
     Optional<JogadorRacha> findByIdDesactived(Long id);
 
     List<JogadorRacha> findByJogadorId(Long jogador);
+
+    @Query("select jr from JogadorRacha jr where jr.jogador.id = :jogador")
+    Optional<JogadorRacha> findByIdJogador(Long jogador);
 }

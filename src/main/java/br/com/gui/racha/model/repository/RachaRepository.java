@@ -18,4 +18,7 @@ public interface RachaRepository extends JpaRepository<Racha, Long> {
 
     @Query("select r from Racha r where r.id = :id")
     Optional<Racha> findByIdDesactived(Long id);
+
+    @Query("select r from Racha r where r.quadra.id = :idQuadra")
+    List<Racha> findByIdQuadra(Long idQuadra);
 }

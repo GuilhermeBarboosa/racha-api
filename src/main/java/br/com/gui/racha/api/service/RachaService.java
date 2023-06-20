@@ -59,4 +59,7 @@ public class RachaService {
         return rachaRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Racha não encontrada"));
     }
 
+    public List<Racha> findByIdQuadra(Long id) {
+        return rachaRepository.findByIdQuadra(id);
+    }
 }

@@ -8,7 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,11 +27,16 @@ public class JogadorRachaService {
     @Autowired
     private final JogadorService jogadorService;
 
-    public JogadorRacha save(JogadorRachaInput jogadorRachaInput) {
-        JogadorRacha jogadorRacha = modelMapper.map(jogadorRachaInput, JogadorRacha.class);
-        jogadorRacha.setRacha(rachaService.findById(jogadorRachaInput.getRacha()));
-        jogadorRacha.setJogador(jogadorService.findById(jogadorRachaInput.getJogador()));
-        return jogadorRachaRepository.save(jogadorRacha);
+    public List<JogadorRacha> save(List<JogadorRachaInput> jogadorRachaInput) {
+        List<JogadorRacha> saveJogadores = new ArrayList<>();
+        for (int i=0; i < jogadorRachaInput.size(); i++) {
+            System.out.println(jogadorRachaInput.get(i).getJogador());
+            JogadorRacha jogadorRacha = modelMapper.map(jogadorRachaInput.get(i), JogadorRacha.class);
+            jogadorRacha.setRacha(rachaService.findById(jogadorRachaInput.get(i).getRacha()));
+            jogadorRacha.setJogador(jogadorService.findByUser(jogadorRachaInput.get(i).getJogador()).get());
+            saveJogadores.add(jogadorRachaRepository.save(jogadorRacha));
+        }
+        return saveJogadores;
     }
 
     public List<JogadorRacha> listAll() {
@@ -43,6 +51,7 @@ public class JogadorRachaService {
         JogadorRacha jogadorRacha = findById(id);
         jogadorRacha.setJogador(jogadorService.findById(jogadorRachaInput.getJogador()));
         jogadorRacha.setRacha(rachaService.findById(jogadorRachaInput.getRacha()));
+        jogadorRacha.setActived(true);
         return jogadorRachaRepository.save(jogadorRacha);
     }
 
@@ -62,5 +71,9 @@ public class JogadorRachaService {
 
     public List<JogadorRacha> findByUser(Long id) {
         return jogadorRachaRepository.findByJogadorId(id);
+    }
+
+    public Optional<JogadorRacha> findByIdJogador(Long id) {
+        return jogadorRachaRepository.findByIdJogador(id);
     }
 }

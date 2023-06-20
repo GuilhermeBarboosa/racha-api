@@ -69,4 +69,5 @@ public class JogadorService {
     public Optional<Jogador> findByUser(Long id) {
         return jogadorRepository.findByUserId(id);
     }
+
 }

@@ -1,20 +1,20 @@
 package br.com.gui.racha.api.controller;
 
 import br.com.gui.racha.api.service.JogadorRachaService;
-import br.com.gui.racha.model.entity.Jogador;
 import br.com.gui.racha.model.entity.JogadorRacha;
 import br.com.gui.racha.model.input.JogadorRachaInput;
-import br.com.gui.racha.model.output.JogadorOutput;
 import br.com.gui.racha.model.output.JogadorRachaOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,9 +27,20 @@ public class JogadorRachaController {
     private final JogadorRachaService jogadorRachaService;
 
     @PostMapping
-    public ResponseEntity<JogadorRachaOutput> save(@Valid @RequestBody JogadorRachaInput jogadorRachaInput) {
-        JogadorRacha createdJogadorRacha = jogadorRachaService.save(jogadorRachaInput);
-        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(createdJogadorRacha);
+    public HttpEntity<? extends Object> save(@Valid @RequestBody List<JogadorRachaInput> jogadorRachaInput) {
+        for(int i=0; i<jogadorRachaInput.size(); i++){
+            Optional<JogadorRacha> findJogador = jogadorRachaService.findByIdJogador(jogadorRachaInput.get(i).getJogador());
+            if(findJogador.isPresent() && findJogador.get().getActived()){
+                return new ResponseEntity<String>("Jogador " + findJogador.get().getJogador().getUser().getNome() + " já registrado", HttpStatus.BAD_REQUEST);
+            }else if(findJogador.isPresent() && !findJogador.get().getActived()){
+                jogadorRachaService.updateById(findJogador.get().getId(),  jogadorRachaInput.get(i));
+            }
+        }
+
+        List<JogadorRacha> createdJogadorRacha = jogadorRachaService.save(jogadorRachaInput);
+        List<JogadorRachaOutput> jogadorRachaOutput = createdJogadorRacha.stream()
+                .map(JogadorRachaOutput::new)
+                .collect(Collectors.toList());
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 
