@@ -55,4 +55,8 @@ public class JogoService {
     public Jogo findByIdDesactived(Long id) {
         return jogoRepository.findByIdDesactived(id).orElseThrow(() -> new RuntimeException("Jogo não encontrada"));
     }
+
+    public List<Jogo> listAllByRachas(Long id) {
+        return jogoRepository.findAllByRachas(id);
+    }
 }

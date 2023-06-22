@@ -19,4 +19,7 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
 
     @Query("select j from Jogo j where j.id = :id")
     Optional<Jogo> findByIdDesactived(Long id);
+
+    @Query("select j from Jogo j where j.racha.id = :rachaId")
+    List<Jogo> findAllByRachas(Long rachaId);
 }

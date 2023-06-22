@@ -11,6 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +26,8 @@ public class JogoController {
     private ModelMapper modelMapper;
     @Autowired
     private final JogoService jogoService;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @PostMapping
     public ResponseEntity<JogoOutput> save(@Valid @RequestBody JogoInput jogoInput) {
@@ -47,6 +53,16 @@ public class JogoController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
     }
+
+    @GetMapping("/racha/{id}")
+    public ResponseEntity<List<JogoOutput>> getByIdRacha(@PathVariable Long id) {
+        List<Jogo> jogos = jogoService.listAllByRachas(id);
+        List<JogoOutput> responseDTOS = jogos.stream()
+                .map(JogoOutput::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOS);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<JogoOutput> getById(@PathVariable Long id) {
