@@ -76,4 +76,8 @@ public class JogadorRachaService {
     public Optional<JogadorRacha> findByIdJogador(Long id) {
         return jogadorRachaRepository.findByIdJogador(id);
     }
+
+    public List<JogadorRacha> findByIdRacha(Long id) {
+        return jogadorRachaRepository.findByIdRacha(id);
+    }
 }

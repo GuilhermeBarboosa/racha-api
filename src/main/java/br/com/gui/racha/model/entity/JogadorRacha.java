@@ -18,6 +18,11 @@ public class JogadorRacha extends DefaultEntity implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
+//    @NotNull
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user", nullable = false)
+//    private User user;
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "jogador", nullable = false)

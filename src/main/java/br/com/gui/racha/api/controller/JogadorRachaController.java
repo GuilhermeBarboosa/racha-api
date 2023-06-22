@@ -29,6 +29,7 @@ public class JogadorRachaController {
     @PostMapping
     public HttpEntity<? extends Object> save(@Valid @RequestBody List<JogadorRachaInput> jogadorRachaInput) {
         for(int i=0; i<jogadorRachaInput.size(); i++){
+            System.out.println(jogadorRachaInput.get(i).getJogador());
             Optional<JogadorRacha> findJogador = jogadorRachaService.findByIdJogador(jogadorRachaInput.get(i).getJogador());
             if(findJogador.isPresent() && findJogador.get().getActived()){
                 return new ResponseEntity<String>("Jogador " + findJogador.get().getJogador().getUser().getNome() + " já registrado", HttpStatus.BAD_REQUEST);
@@ -74,6 +75,16 @@ public class JogadorRachaController {
         List<JogadorRacha> jogadores = jogadorRachaService.findByUser(id);
 
         List<JogadorRachaOutput> responseDTOS = jogadores.stream()
+                .map(JogadorRachaOutput::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseDTOS);
+    }
+
+    @GetMapping("/racha/{id}")
+    public ResponseEntity<List<?>> getByQuadra(@PathVariable Long id) {
+        List<JogadorRacha> racha = jogadorRachaService.findByIdRacha(id);
+
+        List<JogadorRachaOutput> responseDTOS = racha.stream()
                 .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
