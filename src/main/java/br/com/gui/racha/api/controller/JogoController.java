@@ -38,8 +38,8 @@ public class JogoController {
 
     @GetMapping
     public ResponseEntity<List<JogoOutput>> listAll() {
-        List<Jogo> quadras = jogoService.listAll();
-        List<JogoOutput> responseDTOS = quadras.stream()
+        List<Jogo> arrayJogos = jogoService.listAll();
+        List<JogoOutput> responseDTOS = arrayJogos.stream()
                 .map(JogoOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
@@ -47,8 +47,8 @@ public class JogoController {
 
     @GetMapping("/desativado")
     public ResponseEntity<List<JogoOutput>> listAllPosicao() {
-        List<Jogo> quadras = jogoService.listAllJogo();
-        List<JogoOutput> responseDTOS = quadras.stream()
+        List<Jogo> arrayJogos = jogoService.listAllJogo();
+        List<JogoOutput> responseDTOS = arrayJogos.stream()
                 .map(JogoOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
@@ -56,8 +56,8 @@ public class JogoController {
 
     @GetMapping("/racha/{id}")
     public ResponseEntity<List<JogoOutput>> getByIdRacha(@PathVariable Long id) {
-        List<Jogo> jogos = jogoService.listAllByRachas(id);
-        List<JogoOutput> responseDTOS = jogos.stream()
+        List<Jogo> arrayJogos = jogoService.listAllByRachas(id);
+        List<JogoOutput> responseDTOS = arrayJogos.stream()
                 .map(JogoOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);

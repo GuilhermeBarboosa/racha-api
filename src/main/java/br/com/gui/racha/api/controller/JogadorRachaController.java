@@ -47,8 +47,8 @@ public class JogadorRachaController {
 
     @GetMapping
     public ResponseEntity<List<JogadorRachaOutput>> listAll() {
-        List<JogadorRacha> jogadores = jogadorRachaService.listAll();
-        List<JogadorRachaOutput> responseDTOS = jogadores.stream()
+        List<JogadorRacha> arrayJogadorRacha = jogadorRachaService.listAll();
+        List<JogadorRachaOutput> responseDTOS = arrayJogadorRacha.stream()
                 .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
@@ -56,8 +56,8 @@ public class JogadorRachaController {
 
     @GetMapping("/desativado")
     public ResponseEntity<List<JogadorRachaOutput>> listAllPosicao() {
-        List<JogadorRacha> jogadores = jogadorRachaService.listAllJogadorRacha();
-        List<JogadorRachaOutput> responseDTOS = jogadores.stream()
+        List<JogadorRacha> arrayJogadorRacha = jogadorRachaService.listAllJogadorRacha();
+        List<JogadorRachaOutput> responseDTOS = arrayJogadorRacha.stream()
                 .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
@@ -65,16 +65,16 @@ public class JogadorRachaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<JogadorRachaOutput> getById(@PathVariable Long id) {
-        JogadorRacha jogadoracha = jogadorRachaService.findById(id);
-        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(jogadoracha);
+        JogadorRacha findJogadoRacha = jogadorRachaService.findById(id);
+        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(findJogadoRacha);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 
     @GetMapping("/usuario/{id}")
     public ResponseEntity<List<?>> getByUsuario(@PathVariable Long id) {
-        List<JogadorRacha> jogadores = jogadorRachaService.findByUser(id);
+        List<JogadorRacha> arrayJogadorRacha = jogadorRachaService.findByUser(id);
 
-        List<JogadorRachaOutput> responseDTOS = jogadores.stream()
+        List<JogadorRachaOutput> responseDTOS = arrayJogadorRacha.stream()
                 .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
@@ -82,9 +82,9 @@ public class JogadorRachaController {
 
     @GetMapping("/racha/{id}")
     public ResponseEntity<List<?>> getByQuadra(@PathVariable Long id) {
-        List<JogadorRacha> racha = jogadorRachaService.findByIdRacha(id);
+        List<JogadorRacha> arrayJogadorRacha = jogadorRachaService.findByIdRacha(id);
 
-        List<JogadorRachaOutput> responseDTOS = racha.stream()
+        List<JogadorRachaOutput> responseDTOS = arrayJogadorRacha.stream()
                 .map(JogadorRachaOutput::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDTOS);
@@ -93,8 +93,8 @@ public class JogadorRachaController {
 
     @GetMapping("/desativado/{id}")
     public ResponseEntity<JogadorRachaOutput> getByIdDesactived(@PathVariable Long id) {
-        JogadorRacha jogadoracha = jogadorRachaService.findByIdDesactived(id);
-        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(jogadoracha);
+        JogadorRacha desactivedJogadoRacha = jogadorRachaService.findByIdDesactived(id);
+        JogadorRachaOutput jogadorRachaOutput = new JogadorRachaOutput(desactivedJogadoRacha);
         return ResponseEntity.ok(jogadorRachaOutput);
     }
 
