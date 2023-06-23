@@ -13,9 +13,11 @@ public class QuadraOutput extends DefaultEntityDTO {
     private Long id;
     private String nome;
 
+    private Integer valorQuadra;
     public QuadraOutput(Quadra quadra) {
         this.id = quadra.getId();
         this.nome = quadra.getNome();
+        this.valorQuadra = quadra.getValorQuadra();
         this.setActived(quadra.getActived());
         this.setCreated(quadra.getCreated());
         this.setUpdated(quadra.getUpdated());

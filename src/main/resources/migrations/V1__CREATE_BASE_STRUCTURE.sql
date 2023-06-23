@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 12-Jun-2023 às 11:10
+-- Tempo de geração: 23-Jun-2023 às 12:58
 -- Versão do servidor: 8.0.29
 -- versão do PHP: 7.4.9
 
@@ -24,6 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `flyway_schema_history`
+--
+
+DROP TABLE IF EXISTS `flyway_schema_history`;
+CREATE TABLE IF NOT EXISTS `flyway_schema_history` (
+                                                       `installed_rank` int NOT NULL,
+                                                       `version` varchar(50) DEFAULT NULL,
+                                                       `description` varchar(200) NOT NULL,
+                                                       `type` varchar(20) NOT NULL,
+                                                       `script` varchar(1000) NOT NULL,
+                                                       `checksum` int DEFAULT NULL,
+                                                       `installed_by` varchar(100) NOT NULL,
+                                                       `installed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                       `execution_time` int NOT NULL,
+                                                       `success` tinyint(1) NOT NULL,
+                                                       PRIMARY KEY (`installed_rank`),
+                                                       KEY `flyway_schema_history_s_idx` (`success`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `flyway_schema_history`
+--
+
+INSERT INTO `flyway_schema_history` (`installed_rank`, `version`, `description`, `type`, `script`, `checksum`, `installed_by`, `installed_on`, `execution_time`, `success`) VALUES
+    (1, '1', 'CREATE BASE STRUCTURE', 'SQL', 'V1__CREATE_BASE_STRUCTURE.sql', -13340237, 'root', '2023-06-16 11:02:24', 625, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `jogador`
 --
 
@@ -40,14 +69,15 @@ CREATE TABLE IF NOT EXISTS `jogador` (
                                          PRIMARY KEY (`id`),
                                          KEY `user` (`user`),
                                          KEY `posicao` (`posicao`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `jogador`
 --
 
 INSERT INTO `jogador` (`id`, `user`, `posicao`, `gols`, `assistencias`, `actived`, `created`, `updated`) VALUES
-    (1, 1, 5, 2, 3, 1, '2023-05-31 11:09:36', '2023-06-02 16:22:26');
+                                                                                                             (1, 1, 5, 0, 0, 1, '2023-05-31 11:09:36', '2023-06-16 14:29:30'),
+                                                                                                             (2, 12, 6, 0, 0, 1, '2023-06-20 13:05:56', '2023-06-20 13:05:56');
 
 -- --------------------------------------------------------
 
@@ -66,14 +96,15 @@ CREATE TABLE IF NOT EXISTS `jogador_racha` (
                                                PRIMARY KEY (`id`),
                                                KEY `jogador` (`jogador`),
                                                KEY `jogador_racha_ibfk_2` (`racha`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `jogador_racha`
 --
 
 INSERT INTO `jogador_racha` (`id`, `jogador`, `racha`, `actived`, `created`, `updated`) VALUES
-    (1, 1, 1, 1, '2023-05-31 11:12:29', '2023-05-31 11:12:29');
+                                                                                            (7, 1, 1, 1, '2023-06-20 16:32:03', '2023-06-20 16:32:03'),
+                                                                                            (8, 2, 1, 1, '2023-06-20 16:32:04', '2023-06-20 16:32:04');
 
 -- --------------------------------------------------------
 
@@ -92,14 +123,15 @@ CREATE TABLE IF NOT EXISTS `jogo` (
                                       `updated` timestamp NOT NULL,
                                       PRIMARY KEY (`id`),
                                       KEY `racha` (`racha`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `jogo`
 --
 
 INSERT INTO `jogo` (`id`, `data`, `valor_pago`, `racha`, `actived`, `created`, `updated`) VALUES
-    (1, '2023-05-25 11:12:50', 100, 1, 1, '2023-05-31 11:12:50', '2023-05-31 11:12:50');
+                                                                                              (1, '2023-05-24 06:00:00', 120, 1, 1, '2023-05-31 11:12:50', '2023-06-23 12:53:48'),
+                                                                                              (2, '2023-06-23 06:00:00', 100, 1, 1, '2023-06-23 11:33:01', '2023-06-23 11:33:01');
 
 -- --------------------------------------------------------
 
@@ -137,18 +169,20 @@ DROP TABLE IF EXISTS `quadra`;
 CREATE TABLE IF NOT EXISTS `quadra` (
                                         `id` int NOT NULL AUTO_INCREMENT,
                                         `nome` varchar(100) NOT NULL,
+                                        `valor_quadra` int NOT NULL,
                                         `actived` tinyint(1) NOT NULL,
                                         `created` timestamp NOT NULL,
                                         `updated` timestamp NULL DEFAULT NULL,
                                         PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `quadra`
 --
 
-INSERT INTO `quadra` (`id`, `nome`, `actived`, `created`, `updated`) VALUES
-    (1, 'k10', 1, '2023-05-25 11:32:13', '2023-05-25 11:32:13');
+INSERT INTO `quadra` (`id`, `nome`, `valor_quadra`, `actived`, `created`, `updated`) VALUES
+                                                                                         (1, 'k10', 0, 1, '2023-05-25 11:32:13', '2023-06-16 16:04:31'),
+                                                                                         (2, 'Cardoso', 0, 1, '2023-06-16 15:56:24', '2023-06-16 15:56:24');
 
 -- --------------------------------------------------------
 
@@ -167,14 +201,14 @@ CREATE TABLE IF NOT EXISTS `racha` (
                                        `updated` timestamp NOT NULL,
                                        PRIMARY KEY (`id`),
                                        KEY `quadra` (`quadra`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `racha`
 --
 
 INSERT INTO `racha` (`id`, `nome`, `quadra`, `caixa`, `actived`, `created`, `updated`) VALUES
-    (1, 'racha dos ruim', 1, 10, 1, '2023-05-25 11:41:31', '2023-05-25 11:41:31');
+    (1, 'racha dos ruim', 1, 20, 1, '2023-05-25 11:41:31', '2023-06-20 13:39:23');
 
 -- --------------------------------------------------------
 
@@ -218,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `user` (
                                       `role` int NOT NULL,
                                       PRIMARY KEY (`id`),
                                       KEY `role` (`role`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `user`
@@ -226,8 +260,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `nome`, `idade`, `telefone`, `cpf`, `email`, `senha`, `actived`, `created`, `updated`, `role`) VALUES
                                                                                                                              (1, 'Gui', 22, '34984039344', '019.733.946-85', 'gui@gmail.com', '$2a$10$zN86Q6M6fixWNco5vp/41ueClkxTQV292zuk3cci.JvvcE4nqZka6', 1, '2023-05-25 12:21:30', '2023-06-06 14:30:13', 1),
-                                                                                                                             (12, 'aaaa', 56, '3312312312', '863.345.375-87', 'aaaa@email.com', '$2a$10$CwP81bMXy130272t2/Jvi.caFeFII5vEAH2529.8KaW2XyeaSevZC', 1, '2023-06-05 12:58:14', '2023-06-05 12:58:14', 1),
-                                                                                                                             (13, 'aaaa', 56, '3312312312', '123.566.786-48', 'aasdasdaaa@email.com', '$2a$10$C450oOQhH3qVfyUz.oqyuuBge1deiEyMfKzDnzbnm43G84pczdymC', 0, '2023-06-05 12:59:09', '2023-06-05 14:41:27', 1);
+                                                                                                                             (12, 'Zezin', 56, '3312312312', '863.345.375-87', 'aaaa@email.com', '$2a$10$CwP81bMXy130272t2/Jvi.caFeFII5vEAH2529.8KaW2XyeaSevZC', 1, '2023-06-05 12:58:14', '2023-06-05 12:58:14', 1);
 
 --
 -- Restrições para despejos de tabelas

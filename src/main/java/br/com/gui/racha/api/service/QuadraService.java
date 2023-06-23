@@ -34,6 +34,7 @@ public class QuadraService {
     public Quadra updateById(Long id, QuadraInput quadraInput) {
         Quadra quadra = findById(id);
         quadra.setNome(quadraInput.getNome());
+        quadra.setValorQuadra(quadraInput.getValorQuadra());
         return quadraRepository.save(quadra);
     }
 

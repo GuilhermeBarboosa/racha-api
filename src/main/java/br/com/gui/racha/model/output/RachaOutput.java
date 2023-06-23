@@ -18,6 +18,7 @@ public class RachaOutput extends DefaultEntityDTO {
     private Integer caixa;
     private Long idQuadra;
     private String nomeQuadra;
+    private Integer valorQuadra;
 
     public RachaOutput(Racha racha){
         this.id = racha.getId();
@@ -25,6 +26,7 @@ public class RachaOutput extends DefaultEntityDTO {
         this.caixa = racha.getCaixa();
         this.idQuadra = racha.getQuadra().getId();
         this.nomeQuadra = racha.getQuadra().getNome();
+        this.valorQuadra = racha.getQuadra().getValorQuadra();
         this.setActived(racha.getActived());
         this.setCreated(racha.getCreated());
         this.setUpdated(racha.getUpdated());

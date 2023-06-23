@@ -26,4 +26,9 @@ public class Quadra extends DefaultEntity implements Serializable {
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
+    @NotNull
+    @Column(name = "valor_quadra", nullable = false)
+    private Integer valorQuadra;
+
+
 }

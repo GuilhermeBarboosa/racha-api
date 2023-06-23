@@ -30,6 +30,8 @@ public class JogadorRachaOutput extends DefaultEntityDTO {
     private Long idQuadra;
     private String nomeQuadra;
 
+    private Integer valorQuadra;
+
     public JogadorRachaOutput(JogadorRacha jogadorRacha) {
         this.id = jogadorRacha.getId();
         this.idJogador = jogadorRacha.getJogador().getId();
@@ -46,6 +48,7 @@ public class JogadorRachaOutput extends DefaultEntityDTO {
         this.caixa = jogadorRacha.getRacha().getCaixa();
         this.idQuadra = jogadorRacha.getRacha().getQuadra().getId();
         this.nomeQuadra = jogadorRacha.getRacha().getQuadra().getNome();
+        this.valorQuadra = jogadorRacha.getRacha().getQuadra().getValorQuadra();
         this.setActived(jogadorRacha.getActived());
         this.setCreated(jogadorRacha.getCreated());
         this.setUpdated(jogadorRacha.getUpdated());

@@ -25,6 +25,7 @@ public class JogoOutput extends DefaultEntityDTO {
     //    Quadra
     private Long idQuadra;
     private String nomeQuadra;
+    private Integer valorQuadra;
 
     public JogoOutput(Jogo jogo){
         this.id = jogo.getId();
@@ -35,6 +36,7 @@ public class JogoOutput extends DefaultEntityDTO {
         this.caixa = jogo.getRacha().getCaixa();
         this.idQuadra = jogo.getRacha().getQuadra().getId();
         this.nomeQuadra = jogo.getRacha().getQuadra().getNome();
+        this.valorQuadra = jogo.getRacha().getQuadra().getValorQuadra();
         this.setActived(jogo.getActived());
         this.setCreated(jogo.getCreated());
         this.setUpdated(jogo.getUpdated());

@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class QuadraInput {
     private String nome;
+
+    private Integer valorQuadra;
 }
